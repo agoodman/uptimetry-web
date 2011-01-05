@@ -49,6 +49,7 @@ ul:after,
 #header {
 	font-size: 12pt;
 	padding: 20px;
+	height: 75px;
 }
 
 #logo {
@@ -152,7 +153,8 @@ ul:after,
 
 #sites,
 #account,
-#signup {
+#signup,
+#signin {
 	margin: 0 auto;
 	max-width: 50em;
 }
@@ -179,7 +181,9 @@ ul:after,
 	font-size: 8pt;
 }
 
-#account table tr td:first-child {
+#account table tr td:first-child,
+#signup table tr td:first-child,
+#signin table tr td:first-child {
 	width: 10em;
 }
 
@@ -213,4 +217,13 @@ ul:after,
 
 .modal p {
 	margin: 20px 0 10px 0;
+}
+
+.ui-state-highlight,
+.ui-state-error {
+	margin: 10px auto;
+	min-width: 50em;
+	max-width: 50em;
+	width: 50em;
+	padding: 10px;
 }

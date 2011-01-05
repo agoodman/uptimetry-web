@@ -1,0 +1,18 @@
+#signin
+	%h2 Sign in
+
+	= form_for :session, :url => session_path do |form|
+		%table{:cellpadding => 0, :cellspacing => 0, :border => 0}
+			%tr.text_field
+				%td= form.label :email
+				%td= form.text_field :email
+
+			%tr.text_field
+				%td= form.label :password
+				%td= form.password_field :password
+
+		%p.submit_field= form.submit "Sign in", :disable_with => "Please wait...", :class => 'button'
+
+	%ul
+		%li= link_to "Sign up", sign_up_path
+		%li= link_to "Forgot password?", new_password_path

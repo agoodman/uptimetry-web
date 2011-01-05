@@ -13,9 +13,13 @@ class UsersController < Clearance::UsersController
   end
   
   private
-  
+
   def url_after_create
     sites_path
+  end
+  
+  def flash_notice_after_create
+    flash[:notice] = 'User successfully created. Please sign in'
   end
   
 end
