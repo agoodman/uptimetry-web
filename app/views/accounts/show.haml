@@ -1,0 +1,20 @@
+#account
+	%h1 Account
+
+	%h2 Personal Information
+	%table{:cellpadding => 0, :cellspacing => 0, :border => 0}
+		%tr
+			%td First Name
+			%td= @user.first_name
+		%tr
+			%td Last Name
+			%td= @user.last_name
+
+	%h2 Account Information
+	%table{:cellpadding => 0, :cellspacing => 0, :border => 0}
+		%tr
+			%td Email
+			%td= @user.email
+		%tr
+			%td Password
+			%td= link_to 'RESET PASSWORD', new_password_path, :class => 'button'

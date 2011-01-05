@@ -1,0 +1,171 @@
+@font-face {
+	font-family: Eyechart;
+	src: url('/eyechartbold.ttf');
+}
+
+* {
+	margin: 0;
+	padding: 0;
+} 
+
+body {
+	font-family: Helvetica;
+}
+
+h1 {
+	margin-top: 20px;
+}
+
+h2 {
+	margin-top: 20px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+ul {
+	list-style: none;
+}
+
+ul > li {
+	float: left;
+}
+
+ul:after,
+#header:after {
+	content: '.';
+	visibility: hidden;
+	clear: both;
+}
+
+#header,
+#content,
+#footer {
+	min-width: 50em;
+}
+
+#header {
+	font-size: 12pt;
+	padding: 20px;
+}
+
+#menu {
+	float: right;
+}
+
+#menu a {
+	font-size: 14pt;
+}
+
+#menu a:hover {
+	border-bottom: 2px solid black;
+}
+
+#public_menu,
+#user_menu {
+	float: left;
+}
+
+#public_menu a {
+	background: #eee;
+}
+
+#user_menu a {
+	background: #ddd;
+}
+
+#menu ul {
+	padding: 0 10px;
+}
+
+#menu li a {
+	padding: 10px;
+}
+
+#content {
+	margin: 0 auto;
+	padding: 40px;
+}
+
+#eyechart {
+	text-align: center;
+	font-family: Eyechart;
+}
+
+#eyechart h1,
+#eyechart h2,
+#eyechart h3,
+#eyechart h4,
+#eyechart p {
+	text-align: center;
+	line-height: 1.0;
+	margin: 10px;
+}
+
+#eyechart h1 {
+	font-size: 55pt;
+}
+
+#eyechart h2 {
+	font-size: 47pt;
+}
+
+#eyechart h3 {
+	font-size: 34pt;
+}
+
+#eyechart h4 {
+	font-size: 31pt;
+}
+
+#eyechart h5 {
+	font-size: 20pt;
+}
+
+#eyechart p {
+	font-size: 16pt;
+	max-width: 25em;
+	margin: 30px auto;
+}
+
+#sites,
+#account {
+	margin: 0 auto;
+	max-width: 50em;
+}
+
+#sites table {
+	width: 100%;
+}
+
+#sites tr:hover {
+	background: #eee;
+}
+
+#sites th {
+	text-align: left;
+	font-size: 10pt;
+	padding: 4px 10px;
+}
+
+#sites td {
+	padding: 10px;
+}
+
+#sites td a {
+	font-size: 8pt;
+}
+
+#account table tr td:first-child {
+	width: 10em;
+}
+
+#account td {
+	padding: 10px;
+}
+
+#footer {
+	text-align: center;
+}
