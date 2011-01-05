@@ -1,6 +1,4 @@
 Uptimetry::Application.routes.draw do
-  get "account/show"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -14,9 +12,9 @@ Uptimetry::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :users, :only => [ :new, :create ]
+  resources :users, :only => [ :new, :create, :update ]
   resources :sites
-  resource :account, :only => [ :show, :update ]
+  resource :account, :only => [ :show ]
   resource :session, :only => [ :new, :create, :destroy ]
 
   match 'sign_up' => 'users#new', :as => 'sign_up'
