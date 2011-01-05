@@ -36,7 +36,17 @@ Uptimetry::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'vigilant.heroku.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { :host => 'uptimetry.com' }
+  config.action_mailer.smtp_settings = {
+    :tls => true,
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => "uptimetry.com",
+    :user_name => "mailer@uptimetry.com",
+    :password => "c0nf1rm4t10n",
+    :authentication => :plain
+  }
 
   # Enable threaded mode
   # config.threadsafe!
