@@ -1,20 +1,49 @@
+= content_for :title, 'My Account'
 #account
 	%h1 Account
 
-	%h2 Personal Information
-	%table{:cellpadding => 0, :cellspacing => 0, :border => 0}
-		%tr
-			%td First Name
-			%td= @user.first_name
-		%tr
-			%td Last Name
-			%td= @user.last_name
+	#personal_info
+		%h2
+			Personal Information
+			= link_to_function 'edit', "jQuery('#edit_name').dialog({modal:true,title:'Edit Personal Information',width:'600px'})", :class => 'button wrench'
+		%table{:cellpadding => 0, :cellspacing => 0, :border => 0}
+			%tr
+				%td First Name
+				%td= @user.first_name
 
-	%h2 Account Information
-	%table{:cellpadding => 0, :cellspacing => 0, :border => 0}
-		%tr
-			%td Email
-			%td= @user.email
-		%tr
-			%td Password
-			%td= link_to 'RESET PASSWORD', new_password_path, :class => 'button'
+			%tr
+				%td Last Name
+				%td= @user.last_name
+	
+	#account_info
+		%h2 
+			Account Information
+			= link_to_function 'edit', "jQuery('#edit_email').dialog({modal:true,title:'Edit Account Information',width:'600px'})", :class => 'button wrench'
+		%table{:cellpadding => 0, :cellspacing => 0, :border => 0}
+			%tr
+				%td Email
+				%td= @user.email
+			%tr
+				%td Password
+				%td= link_to 'RESET PASSWORD', new_password_path, :class => 'button'
+
+	#edit_name.modal{:style => 'display:none'}
+		= form_for @user do |f|
+			%table{:cellpadding => 0, :cellspacing => 0, :border => 0}
+				%tr
+					%td= f.label :first_name
+					%td= f.text_field :first_name
+
+				%tr
+					%td= f.label :last_name
+					%td= f.text_field :last_name
+			%p= f.submit 'UPDATE ACCOUNT', :class => 'button'
+
+	#edit_email.modal{:style => 'display:none'}
+		= form_for @user do |f|
+			%table{:cellpadding => 0, :cellspacing => 0, :border => 0}
+				%tr
+					%td= f.label :email
+					%td= f.text_field :email
+
+			%p= f.submit 'UPDATE ACCOUNT', :class => 'button'

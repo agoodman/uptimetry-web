@@ -2,7 +2,7 @@
 %html
 	%head
 		%title 
-			Uptimetry -
+			uptimetry -
 			= yield(:title)
 		%script{:src => "http://www.google.com/jsapi?key=ABQIAAAAPxTP6_umMHWyfMXHRo_PQBSEfduqM-1DVSJvrAuG-sXMl3D3XxRzHgplRb-82VvQp6BVNPn5n6zyAQ", :type => "text/javascript"}
 		%link{:rel => "stylesheet", :href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/eggplant/jquery-ui.css", :type => "text/css"}
@@ -23,13 +23,16 @@
 
 %body
 	#header
-		= link_to 'up • tim • e • try', root_path
+		#logo
+			= link_to 'up • tīm • e • try', root_path
+			%div -noun
+			%p the practice or profession of examining the health and well-being of a website
 		#menu
-			#public_menu
-				%ul
-					%li= link_to 'Features', '#'
-					%li= link_to 'Pricing', '#'
-					%li= link_to 'Support', '#'
+			/ #public_menu
+			/ 	%ul
+			/ 		%li= link_to 'Features', '#'
+			/ 		%li= link_to 'Pricing', '#'
+			/ 		%li= link_to 'Support', '#'
 			#user_menu
 				%ul
 					- if signed_in?
@@ -44,4 +47,4 @@
 		= yield
 	
 	#footer
-		© Copyright 2011 Migrant Studios, LLC
+		© Copyright 2011 Migrant Studios LLC - v0.1

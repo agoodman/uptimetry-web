@@ -43,12 +43,28 @@ ul:after,
 #header,
 #content,
 #footer {
-	min-width: 50em;
+	min-width: 1024px;
 }
 
 #header {
 	font-size: 12pt;
 	padding: 20px;
+}
+
+#logo {
+	float: left;
+	padding: 10px;	
+}
+
+#logo p {
+	font-size: 8pt;
+	max-width: 20em;
+}
+
+#logo div {
+	font-style: italic;
+	font-weight: bold;
+	font-size: 8pt;
 }
 
 #menu {
@@ -130,8 +146,13 @@ ul:after,
 	margin: 30px auto;
 }
 
+#signup table tr td:first-child {
+	width: 15em;
+}
+
 #sites,
-#account {
+#account,
+#signup {
 	margin: 0 auto;
 	max-width: 50em;
 }
@@ -164,8 +185,32 @@ ul:after,
 
 #account td {
 	padding: 10px;
+	vertical-align: top;
+}
+
+#account a {
+	font-size: 8pt;
+	vertical-align: top;
+}
+
+#personal_info,
+#account_info {
+	padding: 25px;
+}
+
+#personal_info:hover,
+#account_info:hover {
+	background: #eee;
 }
 
 #footer {
 	text-align: center;
+}
+
+.modal tr td:first-child {
+	min-width: 10em;
+}
+
+.modal p {
+	margin: 20px 0 10px 0;
 }
