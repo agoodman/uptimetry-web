@@ -1,9 +1,11 @@
 require 'test_helper'
+require 'shoulda'
 
 class WelcomeControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-  end
 
+  context "on get index" do
+    setup { get :index }
+    should respond_with :success
+  end
+  
 end

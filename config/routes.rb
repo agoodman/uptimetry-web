@@ -16,6 +16,13 @@ Uptimetry::Application.routes.draw do
   resources :sites
   resource :account, :only => [ :show ]
   resource :session, :only => [ :new, :create, :destroy ]
+  
+  namespace :api do
+    resource :session, :only => [ :create, :destroy ]
+    resource :user, :only => [ :show, :update, :destroy ]
+    resources :users, :only => :create
+    resources :sites
+  end
 
   match 'sign_up' => 'users#new', :as => 'sign_up'
   match 'sign_in' => 'sessions#new', :as => 'sign_in'
