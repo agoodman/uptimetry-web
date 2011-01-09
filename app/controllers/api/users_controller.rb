@@ -1,4 +1,4 @@
-class Api::UsersController < ApplicationController
+class Api::UsersController < Api::ApiController
   
   before_filter :authenticate, :except => :create
 

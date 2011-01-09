@@ -1,4 +1,4 @@
-class Api::SessionsController < ApplicationController
+class Api::SessionsController < Api::ApiController
   
   def create
     @user = ::User.authenticate(params[:session][:email], params[:session][:password])

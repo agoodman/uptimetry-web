@@ -1,4 +1,4 @@
-class Api::SitesController < ApplicationController
+class Api::SitesController < Api::ApiController
 
   before_filter :authenticate
   before_filter :can_access_site?, :only => [ :show, :update, :destroy ]
