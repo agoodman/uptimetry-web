@@ -49,7 +49,7 @@ class Api::SitesController < Api::ApiController
   private
   
   def can_access_site?
-    deny_access unless current_user.site_ids.include?(params[:id])
+    deny_access unless current_user.site_ids.include?(params[:id].to_i)
   end
   
 end
