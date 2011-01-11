@@ -10,6 +10,18 @@ class Api::SitesController < Api::ApiController
     end
   end
   
+  def create
+    @site = Site.new(params[:site])
+    @site.user_id = current_user.id
+    respond_to do |format|
+      if @site.save
+        format.json { render :json => @site.to_json(:only => [:id,:url,:email]), :status => :success }
+      else
+        format.json { render :json => { :errors => @site.errors.full_messages }, :status => :unprocessible_entity }
+      end
+    end
+  end
+  
   def show
     @site = Site.find(params[:id])
     respond_to do |format|
