@@ -7,7 +7,7 @@ class Api::SessionsController < Api::ApiController
         sign_in(@user)
         format.json { render :json => { :session => { :user_id => @user.id, :remember_token => @user.remember_token } } }
       else
-        format.json { render :json => { :errors => [ 'Email and password does not match.' ] }, :status => :unprocessible_entity }
+        format.json { render :json => { :errors => [ 'Email and password does not match.' ] }, :status => :unprocessable_entity }
       end
     end
   end

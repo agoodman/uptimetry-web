@@ -15,9 +15,9 @@ class Api::SitesController < Api::ApiController
     @site.user_id = current_user.id
     respond_to do |format|
       if @site.save
-        format.json { render :json => @site.to_json(:only => [:id,:url,:email]), :status => :success }
+        format.json { render :json => @site.to_json(:only => [:id,:url,:email]), :status => :ok }
       else
-        format.json { render :json => { :errors => @site.errors.full_messages }, :status => :unprocessible_entity }
+        format.json { render :json => { :errors => @site.errors.full_messages }, :status => :unprocessable_entity }
       end
     end
   end
@@ -35,7 +35,7 @@ class Api::SitesController < Api::ApiController
       if @site.update_attributes(params[:site])
         format.json { head :ok }
       else
-        format.json { render :json => { :errors => @site.errors.full_messages }, :status => :unprocessible_entity }
+        format.json { render :json => { :errors => @site.errors.full_messages }, :status => :unprocessable_entity }
       end
     end
   end
