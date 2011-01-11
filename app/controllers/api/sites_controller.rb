@@ -6,7 +6,7 @@ class Api::SitesController < Api::ApiController
   def index
     @sites = current_user.sites
     respond_to do |format|
-      format.json { render :json => @sites.to_json(:only => [:url,:email,:last_successful_attempt])}
+      format.json { render :json => @sites.to_json(:only => [:id,:url,:email,:last_successful_attempt])}
     end
   end
   
