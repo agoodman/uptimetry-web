@@ -10,28 +10,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110104193725) do
+ActiveRecord::Schema.define(:version => 20110124225114) do
 
   create_table "sites", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "url"
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "last_successful_attempt"
+    t.integer   "user_id"
+    t.string    "url"
+    t.string    "email"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.timestamp "last_successful_attempt"
+    t.boolean   "up",                      :default => true
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "encrypted_password", :limit => 128
-    t.string   "salt",               :limit => 128
-    t.string   "confirmation_token", :limit => 128
-    t.string   "remember_token",     :limit => 128
-    t.boolean  "email_confirmed",                   :default => false, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string    "email"
+    t.string    "encrypted_password", :limit => 128
+    t.string    "salt",               :limit => 128
+    t.string    "confirmation_token", :limit => 128
+    t.string    "remember_token",     :limit => 128
+    t.boolean   "email_confirmed",                   :default => false, :null => false
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "first_name"
+    t.string    "last_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

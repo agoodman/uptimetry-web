@@ -11,10 +11,13 @@ task :cron => :environment do
   User.all.each do |user| 
     user.sites.each do |site|
       if monitor(site.url)
-        site.update_attribute(:last_successful_attempt, Time.now)
+        site.update_attributes(:last_successful_attempt => Time.now, :up => true)
       else
-        # send email
-        SiteMailer.notify(site).deliver
+        # send email only if site was up at last attempt
+        if site.up
+          site.update_attributes(:up => false)
+          SiteMailer.notify(site).deliver
+        end
       end
     end
   end
