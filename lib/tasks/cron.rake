@@ -28,7 +28,7 @@ def monitor(url,limit=10)
   return false if limit == 0
   uri = URI.parse(url)
   http = Net::HTTP.new(uri.host, uri.port)
-  request = Net::HTTP::Get.new(uri.request_uri, { 'User-Agent' => 'cron' })
+  request = Net::HTTP::Get.new(uri.request_uri, { 'User-Agent' => 'Mozilla/5.0 (Linux) Gecko/20101203 Firefox/3.6.13' })
   response = http.request(request)
   case response
   when Net::HTTPSuccess     then return true
