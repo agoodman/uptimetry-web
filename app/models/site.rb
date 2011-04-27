@@ -9,7 +9,7 @@ class Site < ActiveRecord::Base
   before_create :generate_secret_key
   
   def generate_secret_key
-    secret_key = Digest::SHA1.hexdigest("--#{email}--#{url}--")[0..9]
+    self.secret_key = Digest::SHA1.hexdigest("--#{email}--#{url}--")[0..9]
   end
   
 end
