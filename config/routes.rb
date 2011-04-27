@@ -13,7 +13,9 @@ Uptimetry::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :users, :only => [ :new, :create, :update ]
-  resources :sites
+  resources :sites 
+  match 'sites/:secret_key/up' => 'sites#up'
+  match 'sites/:secret_key/down' => 'sites#down'
   resource :account, :only => [ :show ]
   resource :session, :only => [ :new, :create, :destroy ]
   

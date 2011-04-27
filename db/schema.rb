@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110124225114) do
+ActiveRecord::Schema.define(:version => 20110424191603) do
 
   create_table "sites", :force => true do |t|
     t.integer   "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20110124225114) do
     t.timestamp "updated_at"
     t.timestamp "last_successful_attempt"
     t.boolean   "up",                      :default => true
+    t.string    "secret_key"
   end
 
   create_table "users", :force => true do |t|

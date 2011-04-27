@@ -25,6 +25,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'clearance', '>= 0.9', :git => 'git://github.com/agoodman/clearance.git'
 gem 'haml'
+gem 'simple_worker'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
