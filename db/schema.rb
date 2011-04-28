@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110424191603) do
+ActiveRecord::Schema.define(:version => 20110428164424) do
 
   create_table "sites", :force => true do |t|
     t.integer   "user_id"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(:version => 20110424191603) do
     t.boolean   "up",                      :default => true
     t.string    "secret_key"
   end
+
+  add_index "sites", ["secret_key"], :name => "index_sites_on_secret_key"
 
   create_table "users", :force => true do |t|
     t.string    "email"
