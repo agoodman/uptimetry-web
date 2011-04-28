@@ -32,7 +32,7 @@ gem 'simple_worker'
 # and rake tasks are available in development mode:
 
 group :test do
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'shoulda'
 end
 

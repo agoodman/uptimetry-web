@@ -41,8 +41,11 @@ class MonitoringWorker < SimpleWorker::Base
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Get.new(uri.request_uri, { 'User-Agent' => 'Mozilla/5.0 (Linux) Gecko/20101203 Firefox/3.6.13' })
     response = http.request(request)
-    if response != Net::HTTPSuccess
-      log "Unable to call back to #{url}"
+    case response
+    when Net::HTTPSuccess
+      log "Successfully called back to #{url}"
+    else
+      log "Unable to call back to #{url}: received #{response}"
     end
   end
   
