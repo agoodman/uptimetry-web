@@ -28,23 +28,32 @@ class MonitoringWorker < SimpleWorker::Base
     else 
       return false
     end
-  rescue
+  rescue e
+    log "Error encountered: #{e}"
     return false
   end
   
   def match(body)
     return true if css_selector.nil? && xpath.nil?
     doc = Nokogiri::HTML(body)
-    if css_selector
+    if ! css_selector.blank?
       matches = doc.css(css_selector)
-      return ! matches.empty?
+      if ! matches.empty?
+        log "Matched content by CSS selector"
+        return true
+      end
     end
-    if xpath
+    if ! xpath.blank?
       matches = doc.xpath(xpath)
-      return ! matches.empty?
+      if ! matches.empty?
+        log "Matched content by XPath"
+        return true
+      end
     end
+    log "Unable to match content"
     return false
-  rescue
+  rescue e
+    log "Error encountered: #{e}"
     return false
   end
   
