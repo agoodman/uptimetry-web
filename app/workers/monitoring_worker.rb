@@ -1,4 +1,4 @@
-require 'net/http'
+require 'net/https'
 require 'uri'
 require 'nokogiri'
 
@@ -20,6 +20,7 @@ class MonitoringWorker < SimpleWorker::Base
     return false if limit == 0
     uri = URI.parse(url)
     http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true if uri.port == 443
     request = Net::HTTP::Get.new(uri.request_uri, { 'User-Agent' => 'Mozilla/5.0 (Linux) Gecko/20101203 Firefox/3.6.13' })
     response = http.request(request)
     case response
