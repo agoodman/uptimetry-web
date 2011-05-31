@@ -34,7 +34,7 @@ class MonitoringWorker < SimpleWorker::Base
   
   def match(body)
     return true if css_selector.nil? && xpath.nil?
-    doc = Nokogiri::HTML.new(body)
+    doc = Nokogiri::HTML(body)
     if css_selector
       matches = doc.css(css_selector)
       return ! matches.empty?
