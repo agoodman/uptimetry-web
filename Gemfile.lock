@@ -53,6 +53,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    nokogiri (1.4.4)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -93,6 +94,7 @@ DEPENDENCIES
   clearance (>= 0.9)!
   factory_girl_rails
   haml
+  nokogiri
   rails (= 3.0.3)
   shoulda
   simple_worker
