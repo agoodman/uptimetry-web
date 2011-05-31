@@ -29,7 +29,7 @@ class MonitoringWorker < SimpleWorker::Base
     else 
       return false
     end
-  rescue e
+  rescue Exception => e
     log "Error encountered: #{e}"
     return false
   end
@@ -53,7 +53,7 @@ class MonitoringWorker < SimpleWorker::Base
     end
     log "Unable to match content"
     return false
-  rescue e
+  rescue Exception => e
     log "Error encountered: #{e}"
     return false
   end
