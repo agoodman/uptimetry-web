@@ -1,9 +1,10 @@
 require 'net/http'
 require 'uri'
+require 'nokogiri'
 
 class MonitoringWorker < SimpleWorker::Base
 
-  attr_accessor :url, :secret_key
+  attr_accessor :url, :secret_key, :css_selector, :xpath
   
   def run
     if monitor(url)
@@ -22,11 +23,27 @@ class MonitoringWorker < SimpleWorker::Base
     request = Net::HTTP::Get.new(uri.request_uri, { 'User-Agent' => 'Mozilla/5.0 (Linux) Gecko/20101203 Firefox/3.6.13' })
     response = http.request(request)
     case response
-    when Net::HTTPSuccess     then return true
+    when Net::HTTPSuccess     then return match(response.body)
     when Net::HTTPRedirection then return monitor(response['location'], limit - 1)
     else 
       return false
     end
+  rescue
+    return false
+  end
+  
+  def match(body)
+    return true if css_selector.nil? && xpath.nil?
+    doc = Nokogiri::HTML.new(body)
+    if css_selector
+      matches = doc.css(css_selector)
+      return ! matches.empty?
+    end
+    if xpath
+      matches = doc.xpath(xpath)
+      return ! matches.empty?
+    end
+    return false
   rescue
     return false
   end

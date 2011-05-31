@@ -14,4 +14,10 @@
 					%tr
 						%td= f.label :email
 						%td= f.text_field :email
+					%tr
+						%td= f.label :css_selector
+						%td= f.text_field :css_selector, :id => "css_selector_#{dom_id(site)}", :onfocus => "jQuery('#xpath_#{dom_id(site)}').val(null)"
+					%tr
+						%td= f.label :xpath
+						%td= f.text_field :xpath, :id => "xpath_#{dom_id(site)}", :onfocus => "jQuery('#css_selector_#{dom_id(site)}').val(null)"
 				%p= f.submit 'UPDATE SITE', :class => 'button'
