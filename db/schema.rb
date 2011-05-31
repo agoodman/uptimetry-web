@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110531005712) do
+ActiveRecord::Schema.define(:version => 20110531164540) do
 
   create_table "sites", :force => true do |t|
     t.integer   "user_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20110531005712) do
     t.string    "secret_key"
     t.string    "css_selector"
     t.string    "xpath"
+    t.integer   "down_count",              :default => 0
   end
 
   add_index "sites", ["secret_key"], :name => "index_sites_on_secret_key"
