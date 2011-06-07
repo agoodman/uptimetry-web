@@ -32,7 +32,10 @@ class SitesController < ApplicationController
   
   # callbacks for SimpleWorker
   def up
-    @site.update_attributes(:up => true, :last_successful_attempt => Time.now, :down_count => 0)
+    @site.up = true
+    @site.last_successful_attempt = Time.now
+    @site.down_count = 0
+    @site.save
     head :ok
   end
   
@@ -41,7 +44,9 @@ class SitesController < ApplicationController
       # send email only on second consecutive failure
       SiteMailer.notify(@site).deliver 
     end
-    @site.update_attributes(:up => false, :down_count => @site.down_count+1)
+    @site.up = false
+    @site.down_count = @site.down_count + 1
+    @site.save
     head :ok
   end
   
