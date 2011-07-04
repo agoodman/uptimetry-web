@@ -7,4 +7,22 @@ class User < ActiveRecord::Base
   
   include Clearance::User
 
+  # expects EnrollMint::Subscription
+  def update_with_subscription(subscription)
+    product = subscription.product
+    if subscription.expires_on<Date.today
+      self.update_attributes(:site_allowance => 0)
+    else
+      self.update_attributes(:site_allowance => SUBSCRIPTION_PLANS[subscription.product.identifier])
+    end
+  end
+
+  SUBSCRIPTION_PLANS = {
+    "com.uptimetry.subscription.micro" => 3,
+    "com.uptimetry.subscription.small" => 5,
+    "com.uptimetry.subscription.medium" => 10,
+    "com.uptimetry.subscription.large" => 20,
+    "com.uptimetry.subscription.jumbo" => 50
+  }
+  
 end
