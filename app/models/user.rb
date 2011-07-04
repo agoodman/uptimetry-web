@@ -9,11 +9,15 @@ class User < ActiveRecord::Base
 
   # expects EnrollMint::Subscription
   def update_with_subscription(subscription)
-    product = subscription.product
     if subscription.expires_on<Date.today
       self.update_attributes(:site_allowance => 0)
     else
-      self.update_attributes(:site_allowance => SUBSCRIPTION_PLANS[subscription.product.identifier])
+      allowance = SUBSCRIPTION_PLANS[subscription.product.identifier]
+      if allowance
+        self.update_attributes(:site_allowance => allowance)
+      else
+        self.update_attributes(:site_allowance => 0)
+      end
     end
   end
 
