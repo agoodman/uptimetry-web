@@ -15,11 +15,13 @@ module EnrollMint
       else
         Base.site ||= "https://api.enrollmint.com"
       end
-      Base.format = :json
     end
   end
   
   class Base < ActiveResource::Base
+    def format
+      :json
+    end
   end
   
   class Customer < Base
