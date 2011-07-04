@@ -10,12 +10,12 @@ module EnrollMint
       
       Base.user = api_token
       Base.password = 'x'
-      Base.format = :json
       if sandbox
         Base.site ||= "https://sandbox.enrollmint.com"
       else
         Base.site ||= "https://api.enrollmint.com"
       end
+      Base.format = :json
     end
   end
   
