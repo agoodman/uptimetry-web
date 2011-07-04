@@ -2,6 +2,7 @@ class Api::SitesController < Api::ApiController
 
   before_filter :authenticate
   before_filter :can_access_site?, :only => [ :show, :update, :destroy ]
+  before_filter :valid_subscription?, :only => [ :create ]
 
   def index
     @sites = current_user.sites
@@ -15,7 +16,7 @@ class Api::SitesController < Api::ApiController
     @site.user_id = current_user.id
     respond_to do |format|
       if @site.save
-        format.json { render :json => @site.to_json(:only => [:id,:url,:email]), :status => :ok }
+        format.json { render :json => @site.to_json(:only => [:id,:url,:email,:css_selector,:xpath,:down_count]), :status => :ok }
       else
         format.json { render :json => { :errors => @site.errors.full_messages }, :status => :unprocessable_entity }
       end
@@ -50,6 +51,10 @@ class Api::SitesController < Api::ApiController
   
   def can_access_site?
     deny_access unless current_user.site_ids.include?(params[:id].to_i)
+  end
+  
+  def valid_subscription?
+    upgrade_required unless current_user.site_allowance>current_user.sites.count
   end
   
 end
