@@ -18,10 +18,12 @@ Uptimetry::Application.routes.draw do
   match 'sites/:secret_key/down' => 'sites#down'
   resource :account, :only => [ :show ]
   resource :session, :only => [ :new, :create, :destroy ]
+  resources :sessions, :only => [ :new, :create, :destroy ]
   match '/subscriptions/post_back' => 'subscriptions#post_back', :via => :post
   
   namespace :api do
     resource :session, :only => [ :create, :destroy ]
+    resources :sessions, :only => [ :create, :destroy ]
     resource :user, :only => [ :show, :update, :destroy ]
     resources :users, :only => :create
     resources :sites
