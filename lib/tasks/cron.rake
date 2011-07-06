@@ -6,7 +6,7 @@
 task :cron => :environment do
 
   User.all.each do |user| 
-    user.sites.each do |site|
+    user.sites.sort {|x,y| x.created_at<=>y.created_at}.take(user.site_allowance).each do |site|
       monitoring_worker = MonitoringWorker.new
       monitoring_worker.url = site.url
       monitoring_worker.secret_key = site.secret_key

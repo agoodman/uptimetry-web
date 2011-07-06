@@ -3,7 +3,7 @@ require 'digest/sha1'
 module Enrollmint
   
   class << self
-    attr_accessor :api_token, :sandbox
+    attr_accessor :api_token, :sandbox, :bundle_identifier
 
     def configure
       yield self
@@ -11,9 +11,9 @@ module Enrollmint
       Base.user = api_token
       Base.password = 'x'
       if sandbox
-        Base.site = "https://sandbox.enrollmint.com"
+        Base.site = "https://sandbox.enrollmint.com/apps/#{bundle_identifier}"
       else
-        Base.site = "https://api.enrollmint.com"
+        Base.site = "https://api.enrollmint.com/apps/#{bundle_identifier}"
       end
       # Customer.format = :json
       # Subscription.format = :json

@@ -53,8 +53,4 @@ class Api::SitesController < Api::ApiController
     deny_access unless current_user.site_ids.include?(params[:id].to_i)
   end
   
-  def valid_subscription?
-    upgrade_required unless current_user.site_allowance>current_user.sites.count
-  end
-  
 end
