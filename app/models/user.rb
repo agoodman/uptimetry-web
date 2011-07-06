@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   # expects EnrollMint::Subscription
   def update_with_subscription(subscription)
-    if subscription.expires_on<Date.today
+    if subscription.expiration_date<Time.now
       puts "subscription expired"
       self.update_attributes(:site_allowance => 0)
     else
