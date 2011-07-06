@@ -30,12 +30,21 @@ module Enrollmint
   end
   
   class Customer < Base
+    def self.find_by_email(email)
+      find(Digest::SHA1.hexdigest("--#{email}--")[0..9])
+    end
   end
   
   class Subscription < Base
+    def self.find_by_customer_email_and_product_identifier(email,identifier)
+      find(Digest::SHA1.hexdigest("--#{identifier}--#{email}--")[0..9])
+    end
   end
 
   class Product < Base
+    def self.find_by_identifier(identifier)
+      find(Digest::SHA1.hexdigest("--#{identifier}--")[0..9])
+    end
   end
   
 end
