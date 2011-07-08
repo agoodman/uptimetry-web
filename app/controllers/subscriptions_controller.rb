@@ -10,8 +10,10 @@ class SubscriptionsController < ApplicationController
       begin
         subscription = Enrollmint::Subscription.find(subscription_id.to_i)
         unless subscription.nil?
-          user = User.find_by_email(subscription.customer.email)
-          user.update_with_subscription(subscription) unless user.nil?
+          customer = Enrollmint::Customer.find_by_email(subscription.customer.email)
+          user = User.find_by_email(customer.email)
+          user.update_with_customer(customer) unless user.nil?
+          # user.update_with_subscription(subscription) unless user.nil?
         end
       rescue ActiveResource::ResourceNotFound
         puts "invalid susbcription id: #{subscription_id}"
