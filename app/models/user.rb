@@ -5,8 +5,14 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :site_allowance
   validates_presence_of :first_name, :last_name
   
+  before_create :set_default_allowance
+  
   include Clearance::User
 
+  def set_default_allowance
+    self.site_allowance = 0
+  end
+  
   # expects Enrollmint::Subscription
   def update_with_subscription(subscription)
     if subscription.expiration_date<Time.now
