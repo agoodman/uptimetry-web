@@ -22,6 +22,7 @@ Uptimetry::Application.routes.draw do
   resource :account, :only => [ :show ]
   resource :session, :only => [ :new, :create, :destroy ]
   resources :sessions, :only => [ :new, :create, :destroy ]
+  match '/subscriptions/post_back' => 'subscriptions#post_back', :via => :post
   
   namespace :api do
     resource :session, :only => [ :create, :destroy ]
