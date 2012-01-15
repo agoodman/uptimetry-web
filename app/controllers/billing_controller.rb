@@ -1,7 +1,7 @@
 class BillingController < ApplicationController
   
   def post_back
-    puts params.to_s
+    puts params[:json].to_s
     head :ok
   end
 

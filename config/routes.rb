@@ -1,6 +1,6 @@
 Uptimetry::Application.routes.draw do
 
-  match 'billing/post_back' => "billing#post_back", :as => 'billing_post_back'
+  match 'billing/post_back' => "billing#post_back", :via => :post, :as => 'billing_post_back'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
