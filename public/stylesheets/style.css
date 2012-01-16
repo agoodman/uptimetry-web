@@ -3,227 +3,221 @@
 	src: url('/eyechartbold.ttf');
 }
 
-* {
-	margin: 0;
-	padding: 0;
-} 
+* {	margin: 0; padding: 0; }
+html { height: 100%; }
+body { margin: 0; font-family: Helvetica; }
+a { text-decoration: none; color: black; }
+h1 { margin-top: 20px; }
+h2 { margin-top: 20px; }
 
-body {
-	font-family: Helvetica;
-}
+ul { list-style: none; }
 
-h1 {
-	margin-top: 20px;
-}
-
-h2 {
-	margin-top: 20px;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-ul {
-	list-style: none;
-}
-
-ul > li {
-	float: left;
-}
-
-ul:after,
-#header:after {
-	content: '.';
-	visibility: hidden;
-	clear: both;
-}
-
-#header,
-#content,
-#footer {
-	min-width: 1024px;
-}
-
-#header {
-	font-size: 12pt;
-	padding: 20px;
-	height: 75px;
-}
-
-#logo {
-	float: left;
-	padding: 10px;	
-}
-
-#logo p {
-	font-size: 8pt;
-	max-width: 20em;
-}
-
+#header { padding: 20px; text-align: center; background: #efdfde; }
+#logo { float: left; text-align: left; }
+#logo a { background: transparent; font-size: 12pt; }
+#logo p { font-size: 8pt; max-width: 190px; }
 #logo div {
 	font-style: italic;
 	font-weight: bold;
 	font-size: 8pt;
 }
+#menu li a { padding-top: 50px; display: block; }
+#menu li#logo a { padding-top: 0; }
+#menu li#logo { margin-left: 0; }
+#menu a.icon.account { background: url('/images/icon-account.png') no-repeat top center; }
+#menu a.icon.sites { background: url('/images/icon-sites.png') no-repeat top center; }
 
-#menu {
-	float: right;
+#footer { font-size: 8pt; color: #444; text-align: left; padding-left: 20px; padding-top: 20px; }
+
+#sites .sites li a { padding: 5px; display: block; }
+#sites .sites li { margin-top: 10px; }
+#sites .sites li:hover { background: #efefef; }
+#sites .sites li span { display: block; }
+#sites .sites li span.last { font-size: 8pt; }
+
+#plans table th { text-align: left; font-size: 8pt; }
+#plans table th,
+#plans table td { padding: 5px 10px; }
+#plans table th:first-child,
+#plans table td:first-child { padding: 5px 10px 5px 0; }
+
+#account h2 { margin-top: 0; }
+
+/* width font scaling */
+@media screen and (max-width: 320px) { body { font-size: 10pt; } }
+@media screen and (min-width: 321px) and (max-width: 640px) { body { font-size: 12pt; } }
+@media screen and (min-width: 641px) and (max-width: 960px) { body { font-size: 15pt; } }
+@media screen and (min-width: 961px) and (max-width: 1200px) { body { font-size: 18pt; } }
+@media screen and (min-width: 1201px) { body { font-size: 21pt; } }
+
+/* landscape */
+@media screen and (min-aspect-ratio: 4/3) {
+	
+	#header { float: left; margin-right: 20px; }
+	#header ul li { clear: both; display: block; padding: 20px 0; }
+	#header ul li#logo { background: url('/images/icon@2x.png') no-repeat; padding-top: 125px; }
+	
 }
 
-#menu a {
-	font-size: 14pt;
+/* landscape SD */
+@media screen and (min-aspect-ratio: 4/3) and (max-aspect-ratio: 16/9) {
+
+	#header { width: 150px; }
+	#logo { height: 100px; }
+	#logo a { display: block; }
+	#logo p { max-width: 140px; }
+/*	#header li a { height: 200px; display: block; }*/
+	
+}
+	
+/* landscape HD */
+@media screen and (min-aspect-ratio: 16/9) {
+
+	#header { width: 200px; }
+/*	#logo > * { display: block; }*/
+	#logo { height: 100px; }
+/*	#menu li a { height: 200px; display: block; }*/
+	
 }
 
-#menu a:hover {
-	border-bottom: 2px solid black;
-}
+/* portrait */
+@media screen and (max-aspect-ratio: 4/3) {
+	
+	ul:after,
+	#header:after {
+		content: '.';
+		visibility: hidden;
+		clear: both;
+	}
 
-#public_menu,
-#user_menu {
-	float: left;
-}
+	#header,
+	#content,
+	#footer {
+		min-width: 320px;
+/*		max-width: 480px;*/
+	}
 
-#public_menu a {
-	background: #eee;
-}
+	#header {
+		font-size: 12pt;
+		height: 75px;
+	}
 
-#user_menu a {
-	background: #ddd;
-}
+	#menu li { float: left; }
 
-#menu ul {
-	padding: 0 10px;
-}
+	#logo { background: url('/images/icon.png') no-repeat; padding-left: 60px; }
+	#logo p { max-width: 140px; }
 
-#menu li a {
-	padding: 10px;
-}
+	#menu a {
+		font-size: 14pt;
+	}
 
-#content {
-	margin: 0 auto;
-	padding: 40px;
-}
+	#menu a:hover,
+	#menu a.current {
+		border-bottom: 2px solid black;
+	}
 
-#eyechart {
-	text-align: center;
-	font-family: Eyechart;
-}
+	#public_menu {
+		float: left;
+	}
 
-#eyechart h1,
-#eyechart h2,
-#eyechart h3,
-#eyechart h4,
-#eyechart p {
-	text-align: center;
-	line-height: 1.0;
-	margin: 10px;
-}
+	#public_menu a {
+		background: #eee;
+	}
 
-#eyechart h1 {
-	font-size: 55pt;
-}
+	#menu ul {
+/*		padding: 0 10px;*/
+	}
 
-#eyechart h2 {
-	font-size: 47pt;
-}
+	#menu li { margin-left: 15px; }
 
-#eyechart h3 {
-	font-size: 34pt;
-}
+	#menu li a {
+/*		padding: 10px;*/
+	}
 
-#eyechart h4 {
-	font-size: 31pt;
-}
+	#content {
+		margin: 0 auto;
+		padding: 20px;
+	}
 
-#eyechart h5 {
-	font-size: 20pt;
-}
+	#signup table tr td:first-child {
+		width: 15em;
+	}
 
-#eyechart p {
-	font-size: 16pt;
-	max-width: 25em;
-	margin: 30px auto;
-}
+	#sites,
+	#account,
+	#signup,
+	#signin {
+		margin: 0 auto;
+		max-width: 50em;
+	}
 
-#signup table tr td:first-child {
-	width: 15em;
-}
+	#sites { clear: both; }
+	
+	#sites table {
+		width: 100%;
+	}
 
-#sites,
-#account,
-#signup,
-#signin {
-	margin: 0 auto;
-	max-width: 50em;
-}
+	#sites tr:hover {
+		background: #eee;
+	}
 
-#sites table {
-	width: 100%;
-}
+	#sites th {
+		text-align: left;
+		font-size: 10pt;
+		padding: 4px 10px;
+	}
 
-#sites tr:hover {
-	background: #eee;
-}
+	#sites td {
+		padding: 10px;
+	}
 
-#sites th {
-	text-align: left;
-	font-size: 10pt;
-	padding: 4px 10px;
-}
+	#sites td a {
+		font-size: 8pt;
+	}
 
-#sites td {
-	padding: 10px;
-}
+	#account table tr td:first-child,
+	#signup table tr td:first-child,
+	#signin table tr td:first-child {
+		width: 10em;
+	}
 
-#sites td a {
-	font-size: 8pt;
-}
+	#account td {
+		padding: 10px;
+		vertical-align: top;
+	}
 
-#account table tr td:first-child,
-#signup table tr td:first-child,
-#signin table tr td:first-child {
-	width: 10em;
-}
+	#account a {
+		font-size: 8pt;
+		vertical-align: top;
+	}
 
-#account td {
-	padding: 10px;
-	vertical-align: top;
-}
+	#personal_info,
+	#account_info,
+	#session {
+		padding: 20px;
+	}
 
-#account a {
-	font-size: 8pt;
-	vertical-align: top;
-}
+	#personal_info:hover,
+	#account_info:hover,
+	#session:hover {
+		background: #eee;
+	}
 
-#personal_info,
-#account_info {
-	padding: 25px;
-}
+	.modal tr td:first-child {
+		min-width: 10em;
+	}
 
-#personal_info:hover,
-#account_info:hover {
-	background: #eee;
-}
+	.modal p {
+		margin: 20px 0 10px 0;
+	}
 
-#footer {
-	text-align: center;
-}
-
-.modal tr td:first-child {
-	min-width: 10em;
-}
-
-.modal p {
-	margin: 20px 0 10px 0;
-}
-
-.ui-state-highlight,
-.ui-state-error {
-	margin: 10px auto;
-	min-width: 50em;
-	max-width: 50em;
-	width: 50em;
-	padding: 10px;
+	.ui-state-highlight,
+	.ui-state-error {
+		margin: 10px auto;
+		min-width: 50em;
+		max-width: 50em;
+		width: 50em;
+		padding: 10px;
+	}
+	
 }

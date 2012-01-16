@@ -1,4 +1,6 @@
 class SessionsController < Clearance::SessionsController
+
+  layout 'users'
   
   private
   

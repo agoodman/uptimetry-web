@@ -1,0 +1,110 @@
+@font-face {
+	font-family: Eyechart;
+	src: url('/eyechartbold.ttf');
+}
+
+* {	margin: 0; padding: 0; }
+body { font-family: Helvetica; }
+a { text-decoration: none; color: black; }
+ul { list-style: none; }
+
+#header { height: 75px; width: 100%; }
+#logo { background: url('/images/icon.png') no-repeat; padding-left: 75px; max-width: 200px; font-size: 12pt; }
+#logo a { background: transparent; }
+#logo p {
+	font-size: 8pt;
+	max-width: 190px;
+}
+#logo div {
+	font-style: italic;
+	font-weight: bold;
+	font-size: 8pt;
+}
+
+#logo,
+#footer { margin: 20px auto; }
+
+#footer { font-size: 8pt; color: #444; text-align: center; }
+
+#eyechart {
+	clear: both;
+	text-align: center;
+	font-family: Eyechart;
+}
+
+#eyechart h1,
+#eyechart h2,
+#eyechart h3,
+#eyechart h4,
+#eyechart p {
+	text-align: center;
+	line-height: 1.0;
+	margin: 10px;
+}
+
+#eyechart h5 + p { border-top: 1px solid #444; padding-top: 20px; }
+
+@media screen and (min-width: 500px) {
+	body { font-size: 14pt; }
+	
+	#eyechart { min-width: 500px; } 
+	
+	#eyechart h1 {
+		font-size: 55pt;
+	}
+
+	#eyechart h2 {
+		font-size: 47pt;
+	}
+
+	#eyechart h3 {
+		font-size: 34pt;
+	}
+
+	#eyechart h4 {
+		font-size: 31pt;
+	}
+
+	#eyechart h5 {
+		font-size: 20pt;
+	}
+
+	#eyechart p {
+		font-size: 16pt;
+		max-width: 25em;
+		margin: 30px auto;
+	}
+}
+
+/* mobile */
+@media screen and (max-width: 499px) {
+	body { font-size: 10pt; }
+	
+	#eyechart { min-width: 320px; } 
+	
+	#eyechart h1 {
+		font-size: 40pt;
+	}
+
+	#eyechart h2 {
+		font-size: 34pt;
+	}
+
+	#eyechart h3 {
+		font-size: 25pt;
+	}
+
+	#eyechart h4 {
+		font-size: 22pt;
+	}
+
+	#eyechart h5 {
+		font-size: 14pt;
+	}
+
+	#eyechart p {
+		font-size: 12pt;
+		max-width: 25em;
+		margin: 30px auto;
+	}
+}

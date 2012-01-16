@@ -51,11 +51,11 @@ class User < ActiveRecord::Base
   end
   
   SUBSCRIPTION_PLANS = {
-    "com.uptimetry.subscription.micro" => 3,
-    "com.uptimetry.subscription.small" => 5,
-    "com.uptimetry.subscription.medium" => 10,
-    "com.uptimetry.subscription.large" => 20,
-    "com.uptimetry.subscription.jumbo" => 50
+    "com.uptimetry.manual.micro.month" => 3,
+    "com.uptimetry.manual.small.month" => 5,
+    "com.uptimetry.manual.medium.month" => 10,
+    "com.uptimetry.manual.large.month" => 20,
+    "com.uptimetry.manual.jumbo.month" => 50
   }
   
 end

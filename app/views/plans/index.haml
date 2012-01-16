@@ -1,0 +1,13 @@
+= content_for :title, 'Available Plans'
+#plans
+	%h1 Available Plans
+	%table
+		%tr
+			%th PLAN
+			%th VALUE
+			%th MONTHLY
+		- for plan in @plans
+			%tr
+				%td.name= plan.name
+				%td up to #{User::SUBSCRIPTION_PLANS[plan.id]} URLs
+				%td= number_to_currency(plan.amount / 100.0)

@@ -6,7 +6,7 @@
 			= yield(:title)
 		%script{:src => "http://www.google.com/jsapi?key=ABQIAAAAPxTP6_umMHWyfMXHRo_PQBSEfduqM-1DVSJvrAuG-sXMl3D3XxRzHgplRb-82VvQp6BVNPn5n6zyAQ", :type => "text/javascript"}
 		%link{:rel => "stylesheet", :href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/eggplant/jquery-ui.css", :type => "text/css"}
-		= stylesheet_link_tag 'style'
+		= stylesheet_link_tag 'public'
 		= javascript_include_tag :defaults
 		= csrf_meta_tag
 		%script{ :type => "text/javascript", :charset => "utf-8"}
@@ -33,23 +33,23 @@
 
 %body
 	#header
-		%ul#menu
-			%li#logo
-				= link_to 'up • tīm • e • try', root_path
-				%div -noun
-				%p the practice or profession of examining the health and well-being of a website
-			= yield(:nav)
+		#menu
+			%ul
+				%li#logo
+					= link_to 'up • tīm • e • try', root_path
+					%div -noun
+					%p the practice or profession of examining the health and well-being of a website
 	
-	#content
-		- if flash[:notice]
-			.ui-state-highlight
-				%span{:style => "float: left; margin-right: 0.3em;", :class => 'ui-icon ui-icon-info'}
-				= flash[:notice]
-		- if flash[:alert]
-			.ui-state-error
-				%span{:style => "float: left; margin-right: 0.3em;", :class => 'ui-icon ui-icon-alert'}
-				= flash[:alert]
+	- if flash[:notice]
+		.ui-state-highlight
+			%span{:style => "float: left; margin-right: 0.3em;", :class => 'ui-icon ui-icon-info'}
+			= flash[:notice]
+	- if flash[:alert]
+		.ui-state-error
+			%span{:style => "float: left; margin-right: 0.3em;", :class => 'ui-icon ui-icon-alert'}
+			= flash[:alert]
 		
+	#content
 		= yield
 	
 	#footer

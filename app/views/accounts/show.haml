@@ -1,4 +1,8 @@
 = content_for :title, 'My Account'
+= content_for :nav do
+	%li= link_to 'Sites', sites_path, class: 'sites icon'
+	%li= link_to 'Account', account_path, class: 'account icon current'
+
 #account
 	%h1 Account
 
@@ -26,6 +30,11 @@
 			%tr
 				%td Password
 				%td= link_to 'RESET PASSWORD', new_password_path, :class => 'button'
+	
+	#session
+		%h2 
+			Session
+			= link_to 'SIGN OUT', sign_out_path, class: 'button'
 
 	#edit_name.modal{:style => 'display:none'}
 		= form_for @user do |f|
