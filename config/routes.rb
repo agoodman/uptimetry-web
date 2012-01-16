@@ -2,7 +2,11 @@ Uptimetry::Application.routes.draw do
 
   match 'billing/post_back' => "billing#post_back", :via => :post, :as => 'billing_post_back'
 
-  resources :plans, :only => :index
+  resources :plans, :only => :index do
+    collection do
+      post :select
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -18,7 +22,11 @@ Uptimetry::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :users, :only => [ :new, :create, :update ]
-  resources :sites 
+  resources :sites do
+    member do
+      get :refresh
+    end
+  end
   match 'sites/:secret_key/up' => 'sites#up'
   match 'sites/:secret_key/down' => 'sites#down'
   resource :account, :only => [ :show ]

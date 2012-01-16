@@ -15,7 +15,7 @@ class UsersController < Clearance::UsersController
   private
 
   def url_after_create
-    sites_path
+    plans_path
   end
   
   def flash_notice_after_create

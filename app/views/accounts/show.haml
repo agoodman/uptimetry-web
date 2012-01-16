@@ -35,6 +35,10 @@
 		%h2 
 			Session
 			= link_to 'SIGN OUT', sign_out_path, class: 'button'
+	
+	#subscription
+		%h2 Subscription
+		%p Using #{@user.sites.count} / #{@user.site_allowance} URLs
 
 	#edit_name.modal{:style => 'display:none'}
 		= form_for @user do |f|

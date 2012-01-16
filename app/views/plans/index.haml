@@ -1,13 +1,56 @@
 = content_for :title, 'Available Plans'
+- if signed_in?
+	= content_for :nav do
+		%li= link_to 'Sites', sites_path, class: 'sites icon'
+		%li= link_to 'Account', account_path, class: 'account icon current'
+		
 #plans
 	%h1 Available Plans
+	%p 
+		All plans include hourly monitoring and email notification.
+		%br
+		You can also validate content using CSS Selector or XPath.
 	%table
 		%tr
 			%th PLAN
 			%th VALUE
 			%th MONTHLY
+			- if signed_in?
+				%th
 		- for plan in @plans
+			- allowance = User::SUBSCRIPTION_PLANS[plan.id]
 			%tr
 				%td.name= plan.name
-				%td up to #{User::SUBSCRIPTION_PLANS[plan.id]} URLs
+				%td up to #{allowance} URLs
 				%td= number_to_currency(plan.amount / 100.0)
+				- if signed_in?
+					%td
+						- if current_user.site_allowance == allowance
+							This is your current plan
+						- elsif current_user.sites.count < allowance
+							%p= link_to_function 'Choose this Plan', "choosePlan('#{plan.id}', #{plan.amount}, '#{number_to_currency(plan.amount / 100.0)}')", class: 'button'
+						- else
+							You must remove #{current_user.sites.count-allowance} URLs first
+	#credit_card{style: 'display:none'}
+		%form#payment_form{method: "POST"}
+			%input{type: "hidden", name: "plan[id]", class: 'identifier'}
+			%p.amount
+			%input{type: "hidden", class: 'amount'}
+			%p
+				%label Card Number
+				%input{type: "text", size: 20, autocomplete: false, class: 'card-number'}
+			%p
+				%label Expiration Date (MM / YYYY)
+				%input{type: "text", size: 2, autocomplete: false, class: 'card-exp-month'}
+				%span /
+				%input{type: "text", size: 4, autocomplete: false, class: 'card-exp-year'}
+			%p
+				%label CVV
+				%input{type: "text", size: 3, autocomplete: false, class: 'card-cvc'}
+			%p
+				%input.button{type: "submit", value: "Continue to Checkout"}
+		= form_for :plan, url: select_plans_path, html: { id: "select_plan", style: 'display:none' } do |f|
+			= f.hidden_field :id
+			= f.hidden_field :amount
+			= f.hidden_field :token
+			= f.submit "Complete Purchase"

@@ -1,0 +1,16 @@
+= content_for :title, "Site: #{@site.url.blank? ? "Empty" : @site.url}"
+= content_for :nav do
+	%li= link_to 'Sites', sites_path, class: 'sites icon current'
+	%li= link_to 'Account', account_path, class: 'account icon'
+
+#site
+	%h1 Site: 
+	%p.url= @site.url
+
+	%h2 Status:
+	%p.status= render partial: 'status'
+	
+	%p.action
+		Actions:
+		= link_to 'remove', @site, method: :delete, confirm: "Are you sure?", class: 'button trash'
+		= link_to 'refresh', refresh_site_path(@site), class: 'button refresh'

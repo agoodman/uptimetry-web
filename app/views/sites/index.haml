@@ -12,33 +12,35 @@
 		%ul.sites
 			- for site in @sites
 				%li= link_to content_tag(:span, site.url, class: 'url')+content_tag(:span, (site.last_successful_attempt.nil? ? "Never" : time_ago_in_words(site.last_successful_attempt)), class: 'last'), site_path(site)
-								
-	%p= link_to_function 'New Site', "jQuery('#site_panel').dialog({modal:true,title:'New Site',width:'600px'})", :class => 'button'
 
-	#site_panel.modal{:style => 'display:none'}
-		= form_for Site.new do |f|
-			= f.hidden_field :user_id, :value => current_user.id
-			%table{:cellpadding => 0, :cellspacing => 0, :border => 0}
-				%tr
-					%td= f.label :url
-					%td= f.text_field :url, :value => 'http://'
-				%tr
-					%td= f.label :email
-					%td= f.text_field :email, :value => current_user.email
-				%tr
-					%td Add Content Match
-					%td= check_box_tag :content_match, "Yes", false, {:onchange => "if( jQuery('#content_match:checked').val()!==undefined ){ jQuery('#match').show();}else{jQuery('#match, #css, #xpath').hide();jQuery('#site_css_selector, #site_xpath').val(null);}"}
-				%tr{:id => "match", :style => "display:none"}
-					%td Type
-					%td
-						= radio_button_tag :match_type, "css", false, {:onchange => "if( jQuery('#match_type_css').attr('checked')!==undefined){jQuery('#css').show();jQuery('#xpath').hide();}else{jQuery('#css').hide();jQuery('#xpath').show();jQuery('#site_css_selector, #site_xpath').val(null);}"}
-						= label :match_type, "CSS"
-						= radio_button_tag :match_type, "xpath", false, {:onchange => "if( jQuery('#match_type_xpath').attr('checked')!==undefined){jQuery('#css').hide();jQuery('#xpath').show();}else{jQuery('#css').show();jQuery('#xpath').hide();jQuery('#site_css_selector, #site_xpath').val(null);}"}
-						= label :match_type, 'XPath'
-				%tr{:id => "css", :style => "display:none"}
-					%td= f.label :css_selector
-					%td= f.text_field :css_selector
-				%tr{:id => "xpath", :style => "display:none"}
-					%td= f.label :xpath
-					%td= f.text_field :xpath
-			%p= f.submit 'CREATE SITE', :class => 'button'
+	- if current_user.site_allowance<=current_user.sites.count
+		%p= link_to 'Upgrade to Add More', plans_path, class: 'button'
+	- else
+		%p= link_to_function 'New Site', "jQuery('#site_panel').dialog({modal:true,title:'New Site',width:'600px'})", :class => 'button'
+		#site_panel.modal{:style => 'display:none'}
+			= form_for Site.new do |f|
+				= f.hidden_field :user_id, :value => current_user.id
+				%table{:cellpadding => 0, :cellspacing => 0, :border => 0}
+					%tr
+						%td= f.label :url
+						%td= f.text_field :url, :value => 'http://'
+					%tr
+						%td= f.label :email
+						%td= f.text_field :email, :value => current_user.email
+					%tr
+						%td Add Content Match
+						%td= check_box_tag :content_match, "Yes", false, {:onchange => "if( jQuery('#content_match:checked').val()!==undefined ){ jQuery('#match').show();}else{jQuery('#match, #css, #xpath').hide();jQuery('#site_css_selector, #site_xpath').val(null);}"}
+					%tr{:id => "match", :style => "display:none"}
+						%td Type
+						%td
+							= radio_button_tag :match_type, "css", false, {:onchange => "if( jQuery('#match_type_css').attr('checked')!==undefined){jQuery('#css').show();jQuery('#xpath').hide();}else{jQuery('#css').hide();jQuery('#xpath').show();jQuery('#site_css_selector, #site_xpath').val(null);}"}
+							= label :match_type, "CSS"
+							= radio_button_tag :match_type, "xpath", false, {:onchange => "if( jQuery('#match_type_xpath').attr('checked')!==undefined){jQuery('#css').hide();jQuery('#xpath').show();}else{jQuery('#css').show();jQuery('#xpath').hide();jQuery('#site_css_selector, #site_xpath').val(null);}"}
+							= label :match_type, 'XPath'
+					%tr{:id => "css", :style => "display:none"}
+						%td= f.label :css_selector
+						%td= f.text_field :css_selector
+					%tr{:id => "xpath", :style => "display:none"}
+						%td= f.label :xpath
+						%td= f.text_field :xpath
+				%p= f.submit 'CREATE SITE', :class => 'button'
