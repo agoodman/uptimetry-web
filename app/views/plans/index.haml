@@ -23,34 +23,37 @@
 				%td.name= plan.name
 				%td up to #{allowance} URLs
 				%td= number_to_currency(plan.amount / 100.0)
-				- if signed_in?
+				- if signed_in? && current_user.customer_reference.blank?
+					%td
+						%p= link_to_function 'Choose this Plan', "selectPlan('#{plan.id}', #{plan.amount}, '#{number_to_currency(plan.amount / 100.0)}')", class: 'button'
+				- elsif signed_in?
 					%td
 						- if current_user.site_allowance == allowance
 							This is your current plan
 						- elsif current_user.sites.count < allowance
-							%p= link_to_function 'Choose this Plan', "choosePlan('#{plan.id}', #{plan.amount}, '#{number_to_currency(plan.amount / 100.0)}')", class: 'button'
+							= form_for :plan, url: select_plans_path do |f|
+								= f.hidden_field :id, value: plan.id
+								%p= f.submit 'Upgrade to this Plan', class: 'button'
 						- else
 							You must remove #{current_user.sites.count-allowance} URLs first
-	#credit_card{style: 'display:none'}
-		%form#payment_form{method: "POST"}
-			%input{type: "hidden", name: "plan[id]", class: 'identifier'}
-			%p.amount
-			%input{type: "hidden", class: 'amount'}
-			%p
-				%label Card Number
-				%input{type: "text", size: 20, autocomplete: false, class: 'card-number'}
-			%p
-				%label Expiration Date (MM / YYYY)
-				%input{type: "text", size: 2, autocomplete: false, class: 'card-exp-month'}
-				%span /
-				%input{type: "text", size: 4, autocomplete: false, class: 'card-exp-year'}
-			%p
-				%label CVV
-				%input{type: "text", size: 3, autocomplete: false, class: 'card-cvc'}
-			%p
-				%input.button{type: "submit", value: "Continue to Checkout"}
-		= form_for :plan, url: select_plans_path, html: { id: "select_plan", style: 'display:none' } do |f|
-			= f.hidden_field :id
-			= f.hidden_field :amount
-			= f.hidden_field :token
-			= f.submit "Complete Purchase"
+					
+	- if signed_in?
+		#credit_card{style: 'display:none'}
+			= form_for :plan, url: plans_path, html: { id: "payment_form" } do |f|
+				%p.errors
+				= f.hidden_field :id
+				= f.hidden_field :amount, class: 'card-amount'
+				= f.hidden_field :token
+				%p.amount
+				%p
+					%label Card Number
+					%input{type: "text", size: 20, autocomplete: false, class: 'card-number'}
+				%p
+					%label Expiration Date (MM / YYYY)
+					%input{type: "text", size: 2, autocomplete: false, class: 'card-exp-month'}
+					%span /
+					%input{type: "text", size: 4, autocomplete: false, class: 'card-exp-year'}
+				%p
+					%label CVV
+					%input{type: "text", size: 3, autocomplete: false, class: 'card-cvc'}
+				%p= f.submit "Continue to Checkout", class: 'button'

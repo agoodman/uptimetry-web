@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   
   has_many :sites, :dependent => :destroy, :order => 'down_count desc, url asc'
 
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :site_allowance
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
   validates_presence_of :first_name, :last_name
   
   before_create :set_default_allowance

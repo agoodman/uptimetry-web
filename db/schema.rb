@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110628172330) do
+ActiveRecord::Schema.define(:version => 20120116190435) do
 
   create_table "sites", :force => true do |t|
     t.integer   "user_id"
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(:version => 20110628172330) do
     t.string    "first_name"
     t.string    "last_name"
     t.integer   "site_allowance",                    :default => 0
+    t.string    "customer_reference"
+    t.string    "card_last_four"
+    t.string    "card_exp_month"
+    t.string    "card_exp_year"
+    t.string    "card_type"
+    t.date      "next_invoice_date"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

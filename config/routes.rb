@@ -2,7 +2,7 @@ Uptimetry::Application.routes.draw do
 
   match 'billing/post_back' => "billing#post_back", :via => :post, :as => 'billing_post_back'
 
-  resources :plans, :only => :index do
+  resources :plans, :only => [ :create, :index ] do
     collection do
       post :select
     end
