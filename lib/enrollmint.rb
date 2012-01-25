@@ -33,6 +33,13 @@ module Enrollmint
     def self.find_by_email(email)
       find(Digest::SHA1.hexdigest("--#{email}--")[0..9])
     end
+    
+    def create_subscription(product_identifier,expiration_date)
+      product = Product.find_by_identifier(product_identifier)
+      sub = Subscription.new(expires_on: expiration_date, product_id: product.id)
+      sub.customer = self
+      sub.save
+    end
   end
   
   class Subscription < Base
@@ -42,6 +49,10 @@ module Enrollmint
   end
 
   class Product < Base
+    def self.all
+      all
+    end
+    
     def self.find_by_identifier(identifier)
       find(Digest::SHA1.hexdigest("--#{identifier}--")[0..9])
     end
