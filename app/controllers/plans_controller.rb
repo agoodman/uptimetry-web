@@ -18,7 +18,7 @@ class PlansController < ApplicationController
       
     redirect_to sites_path, :notice => "Your subscription is ready to use"
   rescue Stripe::InvalidRequestError => e
-    redirect_to plans_path, :alert => e
+    redirect_to plans_path, :alert => e.message
   end
   
   def select
