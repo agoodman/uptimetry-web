@@ -19,8 +19,8 @@ class BillingController < ApplicationController
         end
         existing_identifiers = customer.subscriptions.map(&:product).compact.uniq.map(&:identifier).compact.uniq
         for subscription in subscriptions
-          identifier = subscription.plan.id
-          expiration_date = Time.at(subscription.period.end)
+          identifier = subscription['plan']['id']
+          expiration_date = Time.at(subscription['period']['end'])
           if existing_identifiers.include?(identifier)
             sub = customer.subscriptions.select {|s| s.product.identifier==identifier}.first
             sub.expiration_date = expiration_date
