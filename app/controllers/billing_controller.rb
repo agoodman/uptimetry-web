@@ -26,8 +26,7 @@ class BillingController < ApplicationController
             sub.expiration_date = expiration_date
             sub.save
           else
-            product = Enrollmint::Product.find_by_identifier(identifier)
-            sub = customer.create_subscription(product.id, expiration_date)
+            sub = customer.create_subscription(identifier, expiration_date)
           end
         end
       end
