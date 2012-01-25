@@ -57,6 +57,9 @@
 		= yield
 	
 	#footer
+		- if signed_in?
+			%p= link_to 'SIGN OUT', sign_out_path
+			
 		© Copyright 2012 Migrant Studios LLC. All Rights Reserved.
 		%br
 		Uptimetry is a trademark of Migrant Studios LLC
