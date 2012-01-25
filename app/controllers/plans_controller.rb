@@ -9,6 +9,8 @@ class PlansController < ApplicationController
   def create
     customer = Stripe::Customer.create(email: current_user.email, plan: params[:plan][:id], card: params[:plan][:token])
 
+    current_user.site_allowance = User::SUBSCRIPTION_PLANS[params[:plan][:id]]
+
     current_user.customer_reference = customer.id
     current_user.card_last_four = customer.active_card.last4
     current_user.card_exp_month = customer.active_card.exp_month
@@ -26,6 +28,10 @@ class PlansController < ApplicationController
     if allowance >= current_user.sites.count
       customer = Stripe::Customer.retrieve(current_user.customer_reference)
       customer.update_subscription(plan: params[:plan][:id], prorate: true)
+
+      current_user.site_allowance = allowance
+      current_user.save
+
       redirect_to plans_path, :notice => "Your subscription has been updated."
     else
       redirect_to plans_path, :alert => "You have too many URLs for that plan."
