@@ -36,8 +36,7 @@ module Enrollmint
     
     def create_subscription(product_identifier,expiration_date)
       product = Product.find_by_identifier(product_identifier)
-      sub = Subscription.new(expires_on: expiration_date, product_id: product.id)
-      sub.customer = self
+      sub = Subscription.new(expires_on: expiration_date, product_id: product.id, customer_id: id)
       sub.save
     end
   end
