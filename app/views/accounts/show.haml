@@ -29,12 +29,12 @@
 				%td= @user.email
 			%tr
 				%td Password
-				%td= link_to 'RESET PASSWORD', new_password_path, :class => 'button'
+				%td= link_to 'Reset Password', new_password_path, :class => 'button'
 	
 	#subscription
 		%h2 Subscription
 		%p Using #{@user.sites.count} / #{@user.site_allowance} URLs
-		%p= link_to 'Change Plan', plans_path
+		%p= link_to 'Change Plan', plans_path, class: 'button'
 
 	#edit_name.modal{:style => 'display:none'}
 		= form_for @user do |f|

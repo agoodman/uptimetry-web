@@ -7,7 +7,7 @@
 #plans
 	%h1 Available Plans
 	%p 
-		All plans include hourly monitoring and email notification.
+		All plans include hourly URL monitoring and email notification.
 		%br
 		You can also validate content using CSS Selector or XPath.
 	%table
@@ -57,3 +57,5 @@
 					%label CVV
 					%input{type: "text", size: 3, autocomplete: false, class: 'card-cvc'}
 				%p= f.submit "Continue to Checkout", class: 'button'
+	- else
+		%p= link_to "Subscribe Today", sign_up_path, class: 'button'

@@ -5,13 +5,18 @@
 
 * {	margin: 0; padding: 0; }
 html { height: 100%; }
-body { margin: 0; font-family: Helvetica; color: #30273a; }
+body { margin: 0; font-family: Helvetica Neue; color: #30273a; }
 a { text-decoration: none; color: #30273a; }
-h1 { margin-top: 20px; }
-h2 { margin-top: 20px; }
+/*h1 { margin-top: 20px; }*/
+/*h2 { margin-top: 20px; }*/
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; clear: both; }
 
 ul { list-style: none; }
-p.action { margin-top: 20px; }
+p.control { margin-top: 20px; }
+
+fieldset { border: 0; margin: 0; padding: 0; }
+label { display: block; }
+label input { display: inline-block; width: 100%;}
 
 #header { padding: 20px; text-align: center; background: white; }
 #logo { float: left; text-align: left; }
@@ -40,7 +45,7 @@ p.action { margin-top: 20px; }
 
 #content { min-height: 320px; }
 
-#footer { font-size: 8pt; color: #444; text-align: left; padding-left: 20px; padding-top: 20px; }
+#footer { font-size: 8pt; color: #444; text-align: left; padding-left: 20px; padding-top: 20px; clear: both; }
 #footer p { margin: 10px 0; }
 
 .ui-widget { font-size: 9pt; }
@@ -67,6 +72,23 @@ p.action { margin-top: 20px; }
 #account table td { padding: 5px; }
 #account table td:first-child { min-width: 100px; }
 
+#session label { display: block; }
+#session form { float: left; }
+#session .action h3,
+#user .action h3 { margin-top: 10px; }
+
+#user { min-width: 36em; }
+#user form { float: left; }
+#user .action ul.validation { list-style: circle; }
+#user .action ul.validation li { font-style: italic; }
+
+.action { float: left; }
+.action { margin-left: 50px; max-width: 60%; border: 1px solid #aab; }
+.action h3,
+.action ul { margin: 20px; }
+.action h2 { color: #666; }
+.action > ul { list-style: disc; margin-left: 50px; }
+
 /* width font scaling */
 @media screen and (max-width: 360px) { body { font-size: 10pt; } }
 @media screen and (max-aspect-ratio: 4/3) and (max-width: 360px) { #menu li { margin-left: 15px; } }
@@ -84,17 +106,18 @@ p.action { margin-top: 20px; }
 /* landscape */
 @media screen and (min-aspect-ratio: 4/3) {
 	
-	#header { float: left; margin-right: 20px; border-right: 1px solid #888; }
+	#header { position: fixed; width: 150px; height: 100%; border-right: 1px solid #888; }
 	#header ul li { clear: both; display: block; padding: 20px 0; }
 	#header ul li#logo { background: url('/images/icon@2x.png') no-repeat; padding-top: 125px; }
 	#menu li { margin-left: 0; }
+	#content,
+	#footer { margin-left: 200px; }
 	
 }
 
 /* landscape SD */
 @media screen and (min-aspect-ratio: 4/3) and (max-aspect-ratio: 16/9) {
 
-	#header { width: 150px; }
 	#logo { height: 100px; }
 	#logo a { display: block; }
 	#logo p { max-width: 140px; }
@@ -104,7 +127,6 @@ p.action { margin-top: 20px; }
 /* landscape HD */
 @media screen and (min-aspect-ratio: 16/9) {
 
-	#header { width: 200px; }
 	#logo { height: 100px; }
 	
 }

@@ -13,7 +13,6 @@ class SessionsController < Clearance::SessionsController
   end
   
   def flash_success_after_create
-    flash[:notice] = 'User signed in.'
   end
   
   def flash_failure_after_create
@@ -21,7 +20,6 @@ class SessionsController < Clearance::SessionsController
   end
   
   def flash_success_after_destroy
-    flash[:notice] = 'User signed out.'
   end
   
 end
