@@ -23,19 +23,20 @@
 				%td.name= plan.name
 				%td up to #{allowance} URLs
 				%td= number_to_currency(plan.amount / 100.0)
-				- if signed_in? && current_user.customer_reference.blank?
-					%td
-						%p= link_to_function 'Choose this Plan', "selectPlan('#{plan.id}', #{plan.amount}, '#{number_to_currency(plan.amount / 100.0)}')", class: 'button'
-				- elsif signed_in?
-					%td
-						- if current_user.site_allowance == allowance
-							This is your current plan
-						- elsif current_user.sites.count < allowance
-							= form_for :plan, url: select_plans_path do |f|
-								= f.hidden_field :id, value: plan.id
-								%p= f.submit 'Upgrade to this Plan', class: 'button'
-						- else
-							You must remove #{current_user.sites.count-allowance} URLs first
+				- if signed_in?
+					- if current_user.customer_reference.blank?
+						%td
+							%p= link_to_function 'Choose this Plan', "selectPlan('#{plan.id}', #{plan.amount}, '#{number_to_currency(plan.amount / 100.0)}')", class: 'button'
+					- else
+						%td
+							- if current_user.site_allowance == allowance
+								This is your current plan
+							- elsif current_user.sites.count < allowance
+								= form_for :plan, url: select_plans_path do |f|
+									= f.hidden_field :id, value: plan.id
+									%p= f.submit 'Change to this Plan', class: 'button'
+							- else
+								You must remove #{current_user.sites.count-allowance} URLs first
 					
 	- if signed_in?
 		#credit_card{style: 'display:none'}
