@@ -25,6 +25,7 @@ Uptimetry::Application.routes.draw do
   resources :sites do
     member do
       get :refresh
+      get :remove
     end
   end
   match 'sites/:secret_key/up' => 'sites#up'

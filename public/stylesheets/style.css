@@ -57,7 +57,10 @@ label input { display: inline-block; width: 100%;}
 #sites .sites li span.last,
 #site .status span.last { font-size: 8pt; }
 
+#site { max-width: 20em; }
 #site .status span { display: block; }
+#site h2 { margin-top: 20px; }
+#site label { margin-top: 10px; }
 
 #plans table th { text-align: left; font-size: 8pt; }
 #plans table th,
@@ -81,6 +84,11 @@ label input { display: inline-block; width: 100%;}
 #user form { float: left; }
 #user .action ul.validation { list-style: circle; }
 #user .action ul.validation li { font-style: italic; }
+
+#credit_card { padding: 20px; }
+#credit_card p { margin-top: 10px; }
+#credit_card p.amount { font-size: 18pt; }
+#credit_card p.amount small { clear: both; }
 
 .action { float: left; }
 .action { margin-left: 50px; max-width: 60%; border: 1px solid #aab; }

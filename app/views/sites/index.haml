@@ -16,7 +16,7 @@
 	- if current_user.site_allowance<=current_user.sites.count
 		%p= link_to 'Upgrade to Add More', plans_path, class: 'button'
 	- else
-		%p= link_to_function 'New Site', "jQuery('#site_panel').dialog({modal:true,title:'New Site',width:'600px'})", :class => 'button'
+		%p= link_to 'New Site', new_site_path, class: 'button'
 		#site_panel.modal{:style => 'display:none'}
 			= form_for Site.new do |f|
 				= f.hidden_field :user_id, :value => current_user.id

@@ -3,28 +3,45 @@ class SitesController < ApplicationController
   before_filter :authorize, :except => [ :up, :down ]
   before_filter :assign_site_by_secret_key, :only => [ :up, :down ]
   before_filter :valid_subscription?, :only => [ :create ]
-  before_filter :assign_site, :only => [ :show, :update, :refresh, :destroy ]
+  before_filter :assign_site, :only => [ :show, :edit, :update, :refresh, :remove, :destroy ]
+  
+  respond_to :html, :js
   
   def index
     @sites = Site.all(:conditions => { :user_id => current_user.id })
+    respond_with(@sites, status: :ok)
   end
   
   def create
     @site = Site.new(params[:site])
-    if ! @site.save
-      flash[:error] = @site.errors.full_messages.join('<br/>')
+    @site.user_id = current_user.id
+    
+    if @site.save
+      redirect_to site_path(@site)
+    else
+      redirect_to new_site_path(site: params[:site]), alert: @site.errors.full_messages
     end
-    redirect_to sites_path
   end
 
+  def new
+    @site = Site.new(params[:site])
+    respond_with(@site, status: :ok)
+  end
+  
   def show
+    respond_with(@site, status: :ok)
+  end
+  
+  def edit
+    respond_with(@site, status: :ok)
   end
   
   def update
-    if ! @site.update_attributes(params[:site])
-      flash[:error] = @site.errors.full_messages.join('<br/>')
+    if @site.update_attributes(params[:site])
+      redirect_to site_path(@site)
+    else
+      redirect_to site_path(@site), alert: @site.errors.full_messages
     end
-    redirect_to sites_path
   end
   
   def refresh
@@ -39,6 +56,10 @@ class SitesController < ApplicationController
       format.html { render :action => :show }
       format.js { render :layout => false }
     end
+  end
+  
+  def remove
+    respond_with(@site)
   end
   
   def destroy

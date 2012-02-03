@@ -2,7 +2,7 @@ class Site < ActiveRecord::Base
   
   belongs_to :user
   
-  attr_accessible :user_id, :url, :email, :css_selector, :xpath
+  attr_accessible :url, :email, :css_selector, :xpath
   
   validates_presence_of :user_id, :url, :email
   validates_format_of :url, :with => /http(s)?\:\/\/(.+)(\/)?(.*)/

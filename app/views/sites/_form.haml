@@ -1,0 +1,22 @@
+%h2 URL
+%p We'll check this URL hourly for public availability.
+%label{for: "site[url]"}
+	= f.text_field :url, placeholder: 'http://google.com'
+
+%h2 Notification
+%p If anything goes wrong, we'll send you a message.
+%label{for: "site[email]"}
+	= f.text_field :email, placeholder: current_user.email
+
+%h2 Content Matching
+%p Sometimes, you need extra peace of mind and you want to confirm the presence of specific HTML elements. Use a CSS selector or XPath expression to match response content.
+
+%label{for: "site[css_selector]"}
+	CSS Selector
+	= f.text_field :css_selector, placeholder: '#user_email'
+
+%label{for: "site[xpath]"}
+	XPath
+	= f.text_field :xpath, placeholder: '//input[id=user_email]'
+
+%p= f.submit 'Save Site', class: 'button'

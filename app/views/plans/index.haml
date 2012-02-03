@@ -57,6 +57,6 @@
 				%p
 					%label CVV
 					%input{type: "text", size: 3, autocomplete: false, class: 'card-cvc'}
-				%p= f.submit "Continue to Checkout", class: 'button'
+				%p= f.submit "Checkout", class: 'button'
 	- else
 		%p= link_to "Subscribe Today", sign_up_path, class: 'button'

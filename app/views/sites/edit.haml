@@ -1,0 +1,6 @@
+= content_for :title, 'Edit Site'
+= content_for :nav do
+	%li= link_to 'Sites', sites_path, class: 'sites icon current'
+	%li= link_to 'Account', account_path, class: 'account icon'
+
+#site= render partial: 'edit'

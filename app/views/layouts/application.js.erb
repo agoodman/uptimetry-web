@@ -1,0 +1,9 @@
+<% if flash[:alert].blank? || flash[:alert].empty? -%>
+$('#errors').html(null);
+$('#errors').hide();
+<% else -%>
+$('#errors').html("<%= escape_javascript(render(partial: 'layouts/flash', locals: { errors: flash[:alert] })) %>");
+$('#errors').show();
+<% end -%>
+<%= yield %>
+jqueryHooks();

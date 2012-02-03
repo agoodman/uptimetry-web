@@ -10,7 +10,16 @@
 	%h2 Status:
 	%p.status= render partial: 'status'
 	
+	- unless @site.css_selector.blank?
+		%h2 CSS Selector:
+		%p= @site.css_selector
+		
+	- unless @site.xpath.blank?
+		%h2 XPath:
+		%p= @site.xpath
+
 	%p.control
 		Actions:
-		= link_to 'remove', @site, method: :delete, confirm: "Are you sure?", class: 'button trash'
+		= link_to 'edit', edit_site_path(@site), class: 'button pencil'
+		= link_to 'remove', remove_site_path(@site), class: 'button trash'
 		= link_to 'refresh', refresh_site_path(@site), class: 'button refresh'
