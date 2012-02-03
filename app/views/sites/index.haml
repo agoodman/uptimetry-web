@@ -13,10 +13,10 @@
 			- for site in @sites
 				%li= link_to content_tag(:span, site.url, class: 'url')+content_tag(:span, (site.last_successful_attempt.nil? ? "Never" : time_ago_in_words(site.last_successful_attempt)), class: 'last'), site_path(site)
 
-	- if current_user.site_allowance<=current_user.sites.count
-		%p= link_to 'Upgrade to Add More', plans_path, class: 'button'
-	- else
+	- if current_user.may_create_sites?
 		%p= link_to 'New Site', new_site_path, class: 'button'
+	- else
+		%p= link_to 'Upgrade to Add More', plans_path, class: 'button'
 		#site_panel.modal{:style => 'display:none'}
 			= form_for Site.new do |f|
 				= f.hidden_field :user_id, :value => current_user.id

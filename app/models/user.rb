@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   def set_default_allowance
     self.site_allowance = 0
   end
+
+  def may_create_sites?
+    site_allowance <= sites.count
+  end
   
   # expects Enrollmint::Subscription
   def update_with_subscription(subscription)
