@@ -10,7 +10,7 @@
 		= csrf_meta_tag
 		%script{ :type => "text/javascript", :src => "https://js.stripe.com/v1/"}
 		%script{ :type => "text/javascript"}
-			Stripe.setPublishableKey("pk_nuzqQkIea7SIWP71MhNwijSTYxjly");
+			Stripe.setPublishableKey("#{ENV['STRIPE_PUBLIC']}");
 		%script{ :type => "text/javascript", :charset => "utf-8"}
 			google.load("jquery","1.4.2");
 			google.load("jqueryui","1.8.2");
