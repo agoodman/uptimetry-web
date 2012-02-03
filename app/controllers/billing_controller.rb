@@ -8,6 +8,7 @@ class BillingController < ApplicationController
     event = Stripe::Event.retrieve(params['id'])
     
     if event['type']=="invoice.payment_succeeded"
+      puts "processing #{event['type']}"
       subscriptions = event['data']['object']['lines']['subscriptions']
       # product_identifiers = subscriptions.collect {|s| s['plan']['id']}
       user = User.find_by_customer_reference(event['data']['object']['customer'])
@@ -31,7 +32,7 @@ class BillingController < ApplicationController
         end
       end
     else
-      puts "TODO: handle payment failure"
+      puts "ignoring #{event['type']}"
     end
     
     head :ok
