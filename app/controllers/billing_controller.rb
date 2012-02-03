@@ -5,13 +5,12 @@ class BillingController < ApplicationController
   protect_from_forgery :except => :post_back
 
   def post_back
-    response = JSON.parse(request.body)
-    event = Stripe::Event.find(response['id'])
+    event = Stripe::Event.find(params['id'])
     
-    if event.type=="invoice.payment_succeeded"
-      subscriptions = event.data.object.lines.subscriptions
+    if event['type']=="invoice.payment_succeeded"
+      subscriptions = event['data']['object']['lines']['subscriptions']
       # product_identifiers = subscriptions.collect {|s| s['plan']['id']}
-      user = User.find_by_customer_reference(event.data.object.customer)
+      user = User.find_by_customer_reference(event['data']['object']['customer'])
       if user
         begin
           customer = Enrollmint::Customer.find_by_email(user.email)
