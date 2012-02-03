@@ -14,7 +14,7 @@ class BillingController < ApplicationController
       if user
         begin
           customer = Enrollmint::Customer.find_by_email(user.email)
-        rescue ActiveResource::RecordNotFound
+        rescue ActiveResource::ResourceNotFound
           customer = Enrollmint::Customer.create(email: user.email)
         end
         existing_identifiers = customer.subscriptions.map(&:product).compact.uniq.map(&:identifier).compact.uniq
