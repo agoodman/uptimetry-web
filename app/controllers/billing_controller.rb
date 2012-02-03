@@ -5,7 +5,7 @@ class BillingController < ApplicationController
   protect_from_forgery :except => :post_back
 
   def post_back
-    event = Stripe::Event.find(params['id'])
+    event = Stripe::Event.retrieve(params['id'])
     
     if event['type']=="invoice.payment_succeeded"
       subscriptions = event['data']['object']['lines']['subscriptions']
