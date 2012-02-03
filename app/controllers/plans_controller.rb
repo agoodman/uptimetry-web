@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
 
-  before_filter :authenticate, :only => [ :create, :select ]
+  before_filter :authorize, :only => [ :create, :select ]
   before_filter :retrieve_plans, :only => :index
   
   def index

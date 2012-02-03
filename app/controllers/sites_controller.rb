@@ -1,6 +1,6 @@
 class SitesController < ApplicationController
   
-  before_filter :authenticate, :except => [ :up, :down ]
+  before_filter :authorize, :except => [ :up, :down ]
   before_filter :assign_site_by_secret_key, :only => [ :up, :down ]
   before_filter :valid_subscription?, :only => [ :create ]
   before_filter :assign_site, :only => [ :show, :update, :refresh, :destroy ]

@@ -23,9 +23,9 @@ gem 'nokogiri'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
-gem 'clearance', '>= 0.9', :git => 'git://github.com/agoodman/clearance.git'
+gem 'clearance', '0.12.0', :git => 'git://github.com/agoodman/clearance.git'
 gem 'haml'
-gem 'simple_worker'
+gem 'iron_worker'
 gem 'stripe'
 
 # Bundle gems for the local environment. Make sure to
@@ -33,7 +33,7 @@ gem 'stripe'
 # and rake tasks are available in development mode:
 
 group :test do
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '1.4.0'
   gem 'shoulda'
 end
 

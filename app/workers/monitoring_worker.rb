@@ -2,7 +2,7 @@ require 'net/https'
 require 'uri'
 require 'nokogiri'
 
-class MonitoringWorker < SimpleWorker::Base
+class MonitoringWorker < IronWorker::Base
 
   attr_accessor :url, :secret_key, :css_selector, :xpath
   

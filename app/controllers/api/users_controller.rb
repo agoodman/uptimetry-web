@@ -1,6 +1,6 @@
 class Api::UsersController < Api::ApiController
   
-  before_filter :authenticate, :except => :create
+  before_filter :authorize, :except => :create
 
   def show
     @user = current_user
