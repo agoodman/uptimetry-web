@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   end
 
   def may_create_sites?
-    site_allowance <= sites.count
+    sites.count <= site_allowance
   end
   
   # expects Enrollmint::Subscription
