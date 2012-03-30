@@ -1,0 +1,25 @@
+= content_for :title, "Site: #{@endpoint.url.blank? ? "Empty" : @endpoint.url}"
+= content_for :nav do
+	%li= link_to 'Domains', domains_path, class: 'sites icon current'
+	%li= link_to 'Account', account_path, class: 'account icon'
+
+#site
+	%h1 Site: 
+	%p.url= @endpoint.url
+
+	%h2 Status:
+	%p.status= render partial: 'status'
+	
+	- unless @endpoint.css_selector.blank?
+		%h2 CSS Selector:
+		%p= @endpoint.css_selector
+		
+	- unless @endpoint.xpath.blank?
+		%h2 XPath:
+		%p= @endpoint.xpath
+
+	%p.control
+		Actions:
+		= link_to 'edit', edit_endpoint_path(@endpoint), class: 'button pencil'
+		= link_to 'remove', remove_endpoint_path(@endpoint), class: 'button trash'
+		= link_to 'refresh', refresh_endpoint_path(@endpoint), class: 'button refresh'

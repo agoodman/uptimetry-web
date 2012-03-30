@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   def valid_subscription?
-    upgrade_required unless current_user.site_allowance>=current_user.sites.count
+    upgrade_required unless current_user.site_allowance>=current_user.endpoints.count
   end
 
   def upgrade_required

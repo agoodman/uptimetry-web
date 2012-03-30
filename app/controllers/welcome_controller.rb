@@ -8,7 +8,7 @@ class WelcomeController < ApplicationController
   private
   
   def check_signed_in
-    redirect_to sites_path and return false if signed_in?
+    redirect_to domains_path and return false if signed_in?
   end
   
 end

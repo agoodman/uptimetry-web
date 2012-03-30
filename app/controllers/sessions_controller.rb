@@ -5,7 +5,7 @@ class SessionsController < Clearance::SessionsController
   private
   
   def url_after_create
-    sites_path
+    domains_path
   end
   
   def url_after_destroy

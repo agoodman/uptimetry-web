@@ -1,0 +1,2 @@
+module Domains::EndpointsHelper
+end

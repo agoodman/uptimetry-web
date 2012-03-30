@@ -18,14 +18,14 @@ class PlansController < ApplicationController
     current_user.card_exp_month = customer.active_card.exp_month
     current_user.save
       
-    redirect_to sites_path, :notice => "Your subscription is ready to use"
+    redirect_to domains_path, :notice => "Your subscription is ready to use"
   rescue Stripe::InvalidRequestError => e
     redirect_to plans_path, :alert => e.message
   end
   
   def select
     allowance = User::SUBSCRIPTION_PLANS[params[:plan][:id]] or 0
-    if allowance >= current_user.sites.count
+    if allowance >= current_user.endpoints.count
       customer = Stripe::Customer.retrieve(current_user.customer_reference)
       customer.update_subscription(plan: params[:plan][:id], prorate: true)
 

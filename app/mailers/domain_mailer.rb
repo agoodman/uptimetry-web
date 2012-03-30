@@ -1,16 +1,16 @@
-class SiteMailer < ActionMailer::Base
+class DomainMailer < ActionMailer::Base
   default :from => "from@example.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
-  #   en.site_mailer.notify.subject
+  #   en.endpoint_mailer.notify.subject
   #
-  def notify(site,time=Time.now)
-    @site = site
+  def notify(endpoint,time=Time.now)
+    @endpoint = endpoint
     @time = time
 
-    mail :to => site.email
+    mail :to => endpoint.email
   end
   
 end

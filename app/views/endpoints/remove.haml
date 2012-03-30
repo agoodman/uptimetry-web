@@ -1,6 +1,6 @@
-= form_for @site, method: :delete, remote: true do |f|
+= form_for @endpoint, html: { method: :delete } do |f|
 	%h1 Remove Site
 	%p Are you sure you want to remove this site? There is no undo.
 	= f.submit "Yes, Remove It.", class: 'button'
-	= link_to 'Cancel', site_path(@site)
+	= link_to 'Cancel', endpoint_path(@endpoint)
 	

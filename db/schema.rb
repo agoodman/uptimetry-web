@@ -10,23 +10,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120116190435) do
+ActiveRecord::Schema.define(:version => 20120329235358) do
 
-  create_table "sites", :force => true do |t|
-    t.integer   "user_id"
-    t.string    "url"
-    t.string    "email"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.timestamp "last_successful_attempt"
-    t.boolean   "up",                      :default => true
-    t.string    "secret_key"
-    t.string    "css_selector"
-    t.string    "xpath"
-    t.integer   "down_count",              :default => 0
+  create_table "domains", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "sites", ["secret_key"], :name => "index_sites_on_secret_key"
+  add_index "domains", ["name"], :name => "index_domains_on_name"
+  add_index "domains", ["user_id"], :name => "index_domains_on_user_id"
+
+  create_table "endpoints", :force => true do |t|
+    t.string   "url"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "last_successful_attempt"
+    t.boolean  "up",                      :default => true
+    t.string   "secret_key"
+    t.string   "css_selector"
+    t.string   "xpath"
+    t.integer  "down_count",              :default => 0
+    t.integer  "domain_id"
+    t.integer  "retry_count",             :default => 3
+    t.integer  "retry_delay",             :default => 30
+  end
+
+  add_index "endpoints", ["domain_id"], :name => "index_endpoints_on_domain_id"
+  add_index "endpoints", ["secret_key"], :name => "index_sites_on_secret_key"
 
   create_table "users", :force => true do |t|
     t.string    "email"

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  
-  has_many :sites, :dependent => :destroy, :order => 'down_count desc, url asc'
+
+  has_many :domains, dependent: :destroy, order: 'name asc'
+  # has_many :endpoints, through: :domains, :order => 'down_count desc, url asc'
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
   validates_presence_of :first_name, :last_name
@@ -9,12 +10,16 @@ class User < ActiveRecord::Base
   
   include Clearance::User
 
+  def endpoints
+    domains.map(&:endpoints).flatten
+  end
+  
   def set_default_allowance
     self.site_allowance = 0
   end
 
-  def may_create_sites?
-    sites.count <= site_allowance
+  def may_create_endpoints?
+    endpoints.count < site_allowance
   end
   
   # expects Enrollmint::Subscription

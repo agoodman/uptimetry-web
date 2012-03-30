@@ -1,6 +1,6 @@
 = content_for :title, 'My Account'
 = content_for :nav do
-	%li= link_to 'Sites', sites_path, class: 'sites icon'
+	%li= link_to 'Domains', domains_path, class: 'sites icon'
 	%li= link_to 'Account', account_path, class: 'account icon current'
 
 #account
@@ -33,7 +33,7 @@
 	
 	#subscription
 		%h2 Subscription
-		%p Using #{@user.sites.count} / #{@user.site_allowance} URLs
+		%p Using #{@user.endpoints.count} / #{@user.site_allowance} URLs
 		%p= link_to 'Change Plan', plans_path, class: 'button'
 
 	#edit_name.modal{:style => 'display:none'}

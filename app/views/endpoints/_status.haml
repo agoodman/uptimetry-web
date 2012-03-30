@@ -1,0 +1,2 @@
+%span.url= @endpoint.up ? "OK" : "OFFLINE"
+%span.last= @endpoint.last_successful_attempt.blank? ? "NEVER" : time_ago_in_words(@endpoint.last_successful_attempt) 

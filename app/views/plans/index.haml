@@ -1,7 +1,7 @@
 = content_for :title, 'Available Plans'
 - if signed_in?
 	= content_for :nav do
-		%li= link_to 'Sites', sites_path, class: 'sites icon'
+		%li= link_to 'Domains', domains_path, class: 'sites icon'
 		%li= link_to 'Account', account_path, class: 'account icon current'
 		
 #plans
@@ -31,12 +31,12 @@
 						%td
 							- if current_user.site_allowance == allowance
 								This is your current plan
-							- elsif current_user.sites.count < allowance
+							- elsif current_user.endpoints.count < allowance
 								= form_for :plan, url: select_plans_path do |f|
 									= f.hidden_field :id, value: plan.id
 									%p= f.submit 'Change to this Plan', class: 'button'
 							- else
-								You must remove #{current_user.sites.count-allowance} URLs first
+								You must remove #{current_user.endpoints.count-allowance} URLs first
 					
 	- if signed_in?
 		#credit_card{style: 'display:none'}
