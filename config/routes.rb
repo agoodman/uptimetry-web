@@ -20,7 +20,7 @@ Uptimetry::Application.routes.draw do
   end
 
   match 'endpoints/:secret_key/up' => 'endpoints#up'
-  match 'enspoints/:secret_key/down' => 'endpoints#down'
+  match 'endpoints/:secret_key/down' => 'endpoints#down'
   resource :account, :only => [ :show ]
   resource :session, :only => [ :new, :create, :destroy ]
   resources :sessions, :only => [ :new, :create, :destroy ]
