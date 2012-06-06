@@ -60,9 +60,9 @@ class MonitoringWorker < IronWorker::Base
   
   def callback(up)
     if up
-      url = "http://uptimetry.com/sites/#{secret_key}/up"
+      url = "http://uptimetry.com/endpoints/#{secret_key}/up"
     else
-      url = "http://uptimetry.com/sites/#{secret_key}/down"
+      url = "http://uptimetry.com/endpoints/#{secret_key}/down"
     end
     uri = URI.parse(url)
     http = Net::HTTP.new(uri.host, uri.port)
