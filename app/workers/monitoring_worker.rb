@@ -37,14 +37,14 @@ class MonitoringWorker < IronWorker::Base
   def match(body)
     return true if css_selector.nil? && xpath.nil?
     doc = Nokogiri::HTML(body)
-    if ! css_selector.blank?
+    if ! (css_selector.nil? || css_selector.empty?)
       matches = doc.css(css_selector)
       if ! matches.empty?
         log "Matched content by CSS selector"
         return true
       end
     end
-    if ! xpath.blank?
+    if ! (xpath.nil? || xpath.empty?)
       matches = doc.xpath(xpath)
       if ! matches.empty?
         log "Matched content by XPath"
