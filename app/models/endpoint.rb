@@ -11,7 +11,7 @@ class Endpoint < ActiveRecord::Base
 
   before_create :generate_secret_key
   before_save :init_down_count
-  before_destroy {|obj| Domain.delete(obj.domain_id) if obj.domain.endpoints.count==1}
+  before_destroy {|obj| Domain.delete(obj.domain_id) if obj.domain!=nil && obj.domain.endpoints.count==1}
   
   def generate_secret_key
     self.secret_key = Digest::SHA1.hexdigest("--#{email}--#{url}--")[0..9]

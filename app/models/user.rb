@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name
   
   before_create :set_default_allowance
+  before_create :generate_api_token
   
   include Clearance::User
 
@@ -18,6 +19,10 @@ class User < ActiveRecord::Base
     self.site_allowance = 0
   end
 
+  def generate_api_token
+    self.api_token = Digest::SHA1.hexdigest("--#{email}--#{Time.now}--")[0..9]
+  end
+  
   def may_create_endpoints?
     endpoints.count < site_allowance
   end
