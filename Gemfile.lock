@@ -49,6 +49,7 @@ GEM
       railties (>= 3.0.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
+    grocer (0.1.0)
     haml (3.1.7)
     hashie (1.2.0)
     httpauth (0.1)
@@ -148,6 +149,7 @@ PLATFORMS
 DEPENDENCIES
   clearance (= 0.12.0)!
   factory_girl_rails (= 1.4.0)
+  grocer
   haml
   iron_worker
   jquery-rails

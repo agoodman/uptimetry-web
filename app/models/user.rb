@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   has_many :domains, dependent: :destroy, order: 'name asc'
   # has_many :endpoints, through: :domains, :order => 'down_count desc, url asc'
+  has_many :devices, dependent: :destroy
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
   validates_presence_of :first_name, :last_name

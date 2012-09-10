@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120812204214) do
+ActiveRecord::Schema.define(:version => 20120910060314) do
+
+  create_table "devices", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "domains", :force => true do |t|
     t.string    "name"

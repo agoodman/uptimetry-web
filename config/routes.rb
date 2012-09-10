@@ -33,6 +33,7 @@ Uptimetry::Application.routes.draw do
     resources :users, :only => :create
     resources :domains
     resources :endpoints
+    resources :devices, only: [ :create, :destroy ]
   end
 
   match 'sign_up' => 'users#new', :as => 'sign_up'

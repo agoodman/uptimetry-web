@@ -101,8 +101,13 @@ class EndpointsController < ApplicationController
       # failure; schedule a retry
       schedule_retry(@endpoint)
     else
-      # send email only on last failed retry
-      DomainMailer.notify(@endpoint).deliver 
+      # send notice only on last failed retry
+      if @endpoint.user.devices.empty?
+        # if user has not configured push messaging, send email
+        DomainMailer.notify(@endpoint).deliver
+      else
+        send_notification
+      end
     end
     @endpoint.up = false
     @endpoint.down_count = @endpoint.down_count + 1
@@ -119,4 +124,26 @@ class EndpointsController < ApplicationController
     monitoring_worker.schedule start_at: Time.now + endpoint.retry_delay.seconds
   end
 
+  def send_notification
+    pusher = Grocer.pusher(
+      certificate: "config/apns/development.pem",
+      gateway: "gateway.sandbox.push.apple.com"
+    )
+      
+    notifications = []
+    payload = { endpoint_id: @endpoint.id }
+    for device in @endpoint.user.devices
+      notification = Grocer::Notification.new(
+        device_token: device.token, 
+        alert: "Outage Alert", 
+        custom: payload
+      )
+      notifications << notification
+    end
+    
+    notifications.each do |notif|
+      pusher.push(notif)
+    end
+  end
+  
 end
