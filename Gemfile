@@ -25,7 +25,7 @@ gem 'nokogiri'
 
 gem 'clearance', '0.12.0', :git => 'git://github.com/agoodman/clearance.git'
 gem 'haml'
-gem 'iron_worker'
+gem 'iron_worker_ng'
 gem 'stripe'
 gem 'jquery-rails'
 gem 'omniauth'
