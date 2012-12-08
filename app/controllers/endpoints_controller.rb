@@ -1,5 +1,5 @@
 class EndpointsController < ApplicationController
-  
+
   before_filter :authorize, :except => [ :up, :down ]
   before_filter :assign_endpoint_by_secret_key, :only => [ :up, :down ]
   before_filter :valid_subscription?, :only => [ :create ]
@@ -45,9 +45,7 @@ class EndpointsController < ApplicationController
   end
   
   def refresh
-    monitoring_worker = MonitoringWorker.new
-    monitoring_worker.url = @endpoint.url
-    if monitoring_worker.monitor(@endpoint.url)
+    if @endpoint.monitor(@endpoint.url, @endpoint.css_selector, @endpoint.xpath)
       endpoint_is_up
     else
       endpoint_is_down

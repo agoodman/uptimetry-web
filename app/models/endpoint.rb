@@ -1,4 +1,7 @@
+require 'monitorable'
 class Endpoint < ActiveRecord::Base
+
+  include ::Monitorable
   
   belongs_to :domain
   
