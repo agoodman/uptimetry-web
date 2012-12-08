@@ -48,7 +48,7 @@ class EndpointsController < ApplicationController
     if @endpoint.monitor(@endpoint.url, @endpoint.css_selector, @endpoint.xpath)
       endpoint_is_up
     else
-      endpoint_is_down
+      endpoint_is_down(false)
     end
     respond_to do |format|
       format.html { render :action => :show }
@@ -94,10 +94,10 @@ class EndpointsController < ApplicationController
     @endpoint.save
   end
   
-  def endpoint_is_down
+  def endpoint_is_down(attempt_retry=true)
     if @endpoint.down_count < @endpoint.retry_count
       # failure; schedule a retry
-      schedule_retry(@endpoint)
+      schedule_retry(@endpoint) if attempt_retry
     else
       # send notice only on last failed retry
       if @endpoint.user.devices.empty?
@@ -114,12 +114,14 @@ class EndpointsController < ApplicationController
 
   def schedule_retry(endpoint)
     return unless Rails.env.production? # only schedule the worker in production env 
-    monitoring_worker = MonitoringWorker.new
-    monitoring_worker.url = endpoint.url
-    monitoring_worker.secret_key = endpoint.secret_key
-    monitoring_worker.css_selector = endpoint.css_selector if endpoint.css_selector
-    monitoring_worker.xpath = endpoint.xpath if endpoint.xpath
-    monitoring_worker.schedule start_at: Time.now + endpoint.retry_delay.seconds
+    client = IronWorkerNG::Client.new
+    attrs = { 
+      url: endpoint.url, 
+      secret_key: endpoint.secret_key, 
+      css_selector: endpoint.css_selector,
+      xpath: endpoint.xpath
+      }
+    client.tasks.create('monitor', attrs, {delay: endpoint.retry_delay.seconds})
   end
 
   def send_notification
