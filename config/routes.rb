@@ -40,5 +40,10 @@ Uptimetry::Application.routes.draw do
   match 'sign_in' => 'sessions#new', :as => 'sign_in'
   match 'sign_out' => 'sessions#destroy', :via => [:get, :delete], :as => 'sign_out'
   
+  # heroku addon api
+  post '/heroku/resources' => 'heroku#resources'
+  delete '/heroku/resources/:id' => 'heroku#destroy'
+  post '/heroku/sso' => 'heroku#sso'
+  
   root :to => "welcome#index"
 end

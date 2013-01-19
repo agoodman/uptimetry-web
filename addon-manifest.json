@@ -1,0 +1,16 @@
+{
+  "id": "uptimetry",
+  "api": {
+    "config_vars": [ "UPTIMETRY_URL" ],
+    "password": "8lsadeR5vL3y133c",
+    "sso_salt": "pPu2hXzTzTYX0RiJ",
+    "production": {
+      "base_url": "https://uptimetry.herokuapp.com/heroku/resources",
+      "sso_url": "https://uptimetry.herokuapp.com/heroku/sso"
+    },
+    "test": {
+      "base_url": "http://local:3000/heroku/resources",
+      "sso_url": "http://local:3000/heroku/sso"
+    }
+  }
+}
