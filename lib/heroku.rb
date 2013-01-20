@@ -1,6 +1,12 @@
 require 'net/http'
 
 class Heroku
+  
+  PLANS = { 'micro' => 3, 
+    'small' => 5, 
+    'medium' => 10, 
+    'large' => 20, 
+    'jumbo' => 50 }
 
   def self.nav
     @@nav_cache ||= nav_from_remote

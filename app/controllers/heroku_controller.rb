@@ -1,13 +1,26 @@
+require 'heroku'
+
 class HerokuController < ApplicationController
 
   before_filter :authenticate_heroku_user, except: [ :sso ]
   skip_before_filter :verify_authenticity_token
   
   # POST /heroku/resources
-  def resources
+  def create
+    puts "params: #{params}"
     user = User.create!(first_name: "heroku", last_name: "user", email: "heroku#{rand*1000000}@uptimetry.com", password: Digest::SHA1.hexdigest("--#{Time.now}--"))
     respond_to do |format|
       format.json { render json: { id: user.id, config: { "UPTIMETRY_URL" => user_url(user) } }, status: :ok }
+    end
+  end
+  
+  # PUT /heroku/resources/:id
+  def update
+    user = User.find(params[:id])
+    user.site_allowance = Heroku::PLANS[params[:plan]]
+    user.save
+    respond_to do |format|
+      format.json { render json: { id: user.id }, status: :ok }
     end
   end
   

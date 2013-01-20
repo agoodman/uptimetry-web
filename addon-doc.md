@@ -1,6 +1,4 @@
-[Uptimetry](http://addons.heroku.com/uptimetry) is an [add-on](http://addons.heroku.com) for providing functionality X.
-
-Adding functionality X to an application provides benefits X, Y and Z. [[Sell the benefits here! Don't skimp - developers have many options these days.]]
+[Uptimetry](http://addons.heroku.com/uptimetry) is an [add-on](http://addons.heroku.com) for monitoring your app's vital resources. Think of it as real-time view testing. Make sure your sign up page is displaying correctly by confirming HTTP 200 OK and matching content in the response via CSS selector or XPath. Receive email or SMS when your page is not rendering as designed.
 
 Uptimetry is accessible via an API.
 
@@ -14,7 +12,7 @@ A list of all plans available can be found [here](http://addons.heroku.com/uptim
 
     :::term
     $ heroku addons:add uptimetry
-    -----> Adding uptimetry to sharp-mountain-4005... done, v18 (free)
+    -----> Adding uptimetry to your-app... done, v18 ($3)
 
 Once Uptimetry has been added a `UPTIMETRY_URL` setting will be available in the app configuration and will contain the [[variable purpose, i.e. "canonical URL used to access the newly provisioned Uptimetry service instance."]]. This can be confirmed using the `heroku config:get` command.
 
