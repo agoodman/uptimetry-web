@@ -8,7 +8,9 @@ class HerokuController < ApplicationController
   # POST /heroku/resources
   def create
     puts "params: #{params}"
-    user = User.create!(first_name: "heroku", last_name: "user", email: "heroku#{rand*1000000}@uptimetry.com", password: Digest::SHA1.hexdigest("--#{Time.now}--"))
+    user = User.create!(first_name: "heroku", last_name: "user", email: params[:heroku_id], password: Digest::SHA1.hexdigest("--==#{params[:heroku_id]}==--"))
+    user.site_allowance = Heroku::PLANS[params[:plan]]
+    user.save
     respond_to do |format|
       format.json { render json: { id: user.id, config: { "UPTIMETRY_URL" => user_url(user) } }, status: :ok }
     end
