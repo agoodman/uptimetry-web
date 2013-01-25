@@ -1,5 +1,3 @@
-require 'heroku'
-
 class HerokuController < ApplicationController
 
   before_filter :authenticate_heroku_user, except: [ :sso ]
