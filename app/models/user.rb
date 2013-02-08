@@ -24,8 +24,9 @@ class User < ActiveRecord::Base
     self.api_token = Digest::SHA1.hexdigest("--#{email}--#{Time.now}--")[0..9]
   end
   
+  # functionally deprecated; users can always add endpoints; only paid users get monitoring
   def may_create_endpoints?
-    endpoints.count < site_allowance
+    true
   end
   
   # expects Enrollmint::Subscription
