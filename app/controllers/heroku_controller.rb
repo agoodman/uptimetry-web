@@ -1,4 +1,4 @@
-require 'heroku'
+require 'lib/heroku'
 
 class HerokuController < ApplicationController
 
