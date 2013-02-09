@@ -1,6 +1,6 @@
 require 'net/http'
 
-class Heroku
+class HerokuAddon
   
   PLANS = { 'test' => 1,
     'micro' => 3, 
