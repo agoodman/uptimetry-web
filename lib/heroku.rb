@@ -2,7 +2,8 @@ require 'net/http'
 
 class Heroku
   
-  PLANS = { 'micro' => 3, 
+  PLANS = { 'test' => 1,
+    'micro' => 3, 
     'small' => 5, 
     'medium' => 10, 
     'large' => 20, 
