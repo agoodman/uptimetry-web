@@ -85,7 +85,11 @@ class User < ActiveRecord::Base
           endpoint.domain = Domain.for_url(endpoint.url, id)
           endpoint.save
         end
+      else
+        puts "no domains found for this app"
       end
+    else
+      puts "unable to connect to heroku"
     end
     endpoints.any?
   rescue Exception => e
