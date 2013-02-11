@@ -9,8 +9,8 @@ class HerokuController < ApplicationController
       last_name: "user", 
       email: params[:heroku_id], 
       password: Digest::SHA1.hexdigest("--==#{params[:heroku_id]}==--"),
-      heroku_id: params[:heroku_id],
-      heroku_callback_url: params[:callback_url])
+      heroku_id: CGI::unescape(params[:heroku_id]),
+      heroku_callback_url: CGI::unescape(params[:callback_url]))
     user.site_allowance = HerokuAddon::PLANS[params[:plan]]
     puts "unable to sync domains from heroku" unless user.sync_with_heroku
     user.save!
