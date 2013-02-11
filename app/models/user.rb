@@ -68,8 +68,6 @@ class User < ActiveRecord::Base
   
   # called when heroku provisions a new user
   def sync_with_heroku
-    return unless Rails.env.production?
-
     # retrieve app config from heroku callback
     response = HTTParty.get(heroku_callback_url, {basic_auth: {username: 'uptimetry', password: '8lsadeR5vL3y133c'}})
     if response
@@ -89,6 +87,9 @@ class User < ActiveRecord::Base
         end
       end
     end
+    endpoints.any?
+  rescue
+    false
   end
   
   SUBSCRIPTION_PLANS = {
