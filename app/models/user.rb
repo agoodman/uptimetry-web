@@ -69,11 +69,16 @@ class User < ActiveRecord::Base
   # called when heroku provisions a new user
   def sync_with_heroku
     return unless Rails.env.production?
+
     # retrieve app config from heroku callback
     response = HTTParty.get(heroku_callback_url, {basic_auth: {username: 'uptimetry', password: '8lsadeR5vL3y133c'}})
     if response
-      if response['owner_email'] && !User.exists?(email: response['owner_email'])
-        self.email = response['owner_email'] 
+      if response['owner_email']
+        if User.exists?(email: response['owner_email'])
+          puts "found duplicate user: #{email}, #{response['owner_email']}"
+        else
+          self.email = response['owner_email'] 
+        end
       end
       if response['domains']
         # auto-populate endpoints for all domains found on the heroku app
