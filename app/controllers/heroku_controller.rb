@@ -5,7 +5,7 @@ class HerokuController < ApplicationController
   
   # POST /heroku/resources
   def create
-    user = User.new(first_name: "heroku", 
+    user = User.create!(first_name: "heroku", 
       last_name: "user", 
       email: params[:heroku_id], 
       password: Digest::SHA1.hexdigest("--==#{params[:heroku_id]}==--"),
