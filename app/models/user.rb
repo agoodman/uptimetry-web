@@ -88,7 +88,8 @@ class User < ActiveRecord::Base
       end
     end
     endpoints.any?
-  rescue
+  rescue Exception => e
+    puts "encountered error: #{e.message}"
     false
   end
   
