@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # has_many :endpoints, through: :domains, :order => 'down_count desc, url asc'
   has_many :devices, dependent: :destroy
 
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :heroku_id, :heroku_callback_url
   validates_presence_of :first_name, :last_name
   
   before_create :set_default_allowance
@@ -64,6 +64,26 @@ class User < ActiveRecord::Base
     end
     self.update_attributes(:site_allowance => new_allowance)
     puts "customer: #{customer.email} allowance: #{site_allowance}"
+  end
+  
+  # called when heroku provisions a new user
+  def sync_with_heroku
+    return unless Rails.env.production?
+    # retrieve app config from heroku callback
+    response = HTTParty.get(heroku_callback_url, {basic_auth: {username: 'uptimetry', password: '8lsadeR5vL3y133c'}})
+    if response
+      if response['owner_email'] && !User.exists?(email: response['owner_email'])
+        self.email = response['owner_email'] 
+      end
+      if response['domains']
+        # auto-populate endpoints for all domains found on the heroku app
+        for domain in response['domains']
+          endpoint = Endpoint.new(url: "http://#{domain}", email: email)
+          endpoint.domain = Domain.for_url(endpoint.url, id)
+          endpoint.save
+        end
+      end
+    end
   end
   
   SUBSCRIPTION_PLANS = {

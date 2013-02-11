@@ -5,10 +5,16 @@ class HerokuController < ApplicationController
   
   # POST /heroku/resources
   def create
-    puts "params: #{params}"
-    user = User.create!(first_name: "heroku", last_name: "user", email: params[:heroku_id], password: Digest::SHA1.hexdigest("--==#{params[:heroku_id]}==--"))
+    user = User.new(first_name: "heroku", 
+      last_name: "user", 
+      email: params[:heroku_id], 
+      password: Digest::SHA1.hexdigest("--==#{params[:heroku_id]}==--"),
+      heroku_id: params[:heroku_id],
+      heroku_callback_url: params[:callback_url])
     user.site_allowance = HerokuAddon::PLANS[params[:plan]]
-    user.save
+    user.sync_with_heroku
+    user.save!
+
     respond_to do |format|
       format.json { render json: { id: user.id, config: { "UPTIMETRY_URL" => user_url(user) } }, status: :ok }
     end

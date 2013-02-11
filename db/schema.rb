@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120910060314) do
+ActiveRecord::Schema.define(:version => 20130211205552) do
 
   create_table "devices", :force => true do |t|
     t.integer  "user_id"
@@ -45,20 +45,21 @@ ActiveRecord::Schema.define(:version => 20120910060314) do
     t.integer   "retry_delay",             :default => 30
   end
 
+  add_index "endpoints", ["domain_id"], :name => "index_endpoints_on_domain_id"
   add_index "endpoints", ["secret_key"], :name => "index_sites_on_secret_key"
 
   create_table "users", :force => true do |t|
     t.string    "email"
-    t.string    "encrypted_password", :limit => 128
-    t.string    "salt",               :limit => 128
-    t.string    "confirmation_token", :limit => 128
-    t.string    "remember_token",     :limit => 128
-    t.boolean   "email_confirmed",                   :default => false, :null => false
+    t.string    "encrypted_password",  :limit => 128
+    t.string    "salt",                :limit => 128
+    t.string    "confirmation_token",  :limit => 128
+    t.string    "remember_token",      :limit => 128
+    t.boolean   "email_confirmed",                    :default => false, :null => false
     t.timestamp "created_at"
     t.timestamp "updated_at"
     t.string    "first_name"
     t.string    "last_name"
-    t.integer   "site_allowance",                    :default => 0
+    t.integer   "site_allowance",                     :default => 0
     t.string    "customer_reference"
     t.string    "card_last_four"
     t.string    "card_exp_month"
@@ -66,6 +67,8 @@ ActiveRecord::Schema.define(:version => 20120910060314) do
     t.string    "card_type"
     t.date      "next_invoice_date"
     t.string    "api_token"
+    t.string    "heroku_id"
+    t.string    "heroku_callback_url"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
