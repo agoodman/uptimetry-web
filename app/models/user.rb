@@ -70,6 +70,7 @@ class User < ActiveRecord::Base
   def sync_with_heroku
     # retrieve app config from heroku callback
     response = HerokuAddon.get(heroku_callback_url)
+    puts "received: #{response.body}"
     if response
       if owner_email=response['owner_email']
         if User.exists?(email: owner_email)
