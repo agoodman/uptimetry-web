@@ -71,16 +71,16 @@ class User < ActiveRecord::Base
     # retrieve app config from heroku callback
     response = HTTParty.get(heroku_callback_url, {basic_auth: {username: 'uptimetry', password: '8lsadeR5vL3y133c'}})
     if response
-      if response['owner_email']
-        if User.exists?(email: response['owner_email'])
-          puts "found duplicate user: #{email}, #{response['owner_email']}"
+      if owner_email=response.parsed_response['owner_email']
+        if User.exists?(email: owner_email)
+          puts "found duplicate user: #{email}, #{owner_email}"
         else
-          self.email = response['owner_email'] 
+          self.email = owner_email 
         end
       end
-      if response['domains']
+      if domains=response.parsed_response['domains']
         # auto-populate endpoints for all domains found on the heroku app
-        for domain in response['domains']
+        for domain in domains
           endpoint = Endpoint.new(url: "http://#{domain}", email: email)
           endpoint.domain = Domain.for_url(endpoint.url, id)
           endpoint.save
