@@ -12,7 +12,7 @@ class HerokuController < ApplicationController
       heroku_id: params[:heroku_id],
       heroku_callback_url: params[:callback_url])
     user.site_allowance = HerokuAddon::PLANS[params[:plan]]
-    user.sync_with_heroku
+    puts "unable to sync domains from heroku" unless user.sync_with_heroku
     user.save!
 
     respond_to do |format|
