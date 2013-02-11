@@ -69,16 +69,16 @@ class User < ActiveRecord::Base
   # called when heroku provisions a new user
   def sync_with_heroku
     # retrieve app config from heroku callback
-    response = HTTParty.get(heroku_callback_url, {basic_auth: {username: 'uptimetry', password: '8lsadeR5vL3y133c'}})
+    response = HerokuAddon.get(heroku_callback_url)
     if response
-      if owner_email=response.parsed_response['owner_email']
+      if owner_email=response['owner_email']
         if User.exists?(email: owner_email)
           puts "found duplicate user: #{email}, #{owner_email}"
         else
           self.email = owner_email 
         end
       end
-      if domains=response.parsed_response['domains']
+      if domains=response['domains']
         # auto-populate endpoints for all domains found on the heroku app
         for domain in domains
           endpoint = Endpoint.new(url: "http://#{domain}", email: email)
@@ -91,7 +91,7 @@ class User < ActiveRecord::Base
     else
       puts "unable to connect to heroku"
     end
-    endpoints.any?
+    Endpoint.joins(:domain).exists?(domains: {user_id: id})
   rescue Exception => e
     puts "encountered error: #{e.message}"
     false

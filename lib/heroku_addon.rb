@@ -1,6 +1,9 @@
 require 'net/http'
 
 class HerokuAddon
+  include HTTParty
+  format :json
+  basic_auth 'uptimetry', '8lsadeR5vL3y133c'
   
   PLANS = { 'test' => 1,
     'micro' => 3, 
