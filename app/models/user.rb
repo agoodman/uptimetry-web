@@ -69,6 +69,9 @@ class User < ActiveRecord::Base
   
   # called when heroku provisions a new user
   def sync_with_heroku
+    # only applies to heroku-created users
+    return if heroku_id.blank? || heroku_callback_url.blank?
+    
     # retrieve app config from heroku callback
     puts "retrieving #{heroku_callback_url}"
     response = HerokuAddon.get(heroku_callback_url)
