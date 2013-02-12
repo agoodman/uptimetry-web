@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   
   before_create :set_default_allowance
   before_create :generate_api_token
+  after_create :sync_with_heroku
   
   include Clearance::User
 
@@ -77,7 +78,8 @@ class User < ActiveRecord::Base
         if User.exists?(email: owner_email)
           puts "found duplicate user: #{email}, #{owner_email}"
         else
-          self.email = owner_email 
+          self.email = owner_email
+          self.save
         end
       end
       if domains=response['domains']
@@ -98,6 +100,8 @@ class User < ActiveRecord::Base
     puts "encountered error: #{e.message}"
     false
   end
+  
+  handle_asynchronously :sync_with_heroku, run_at: Proc.new { 2.seconds.from_now }
   
   SUBSCRIPTION_PLANS = {
     "com.uptimetry.manual.micro.month" => 3,
