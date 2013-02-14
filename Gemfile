@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.11'
+gem 'rails', '3.2.12'
 gem 'nokogiri'
 gem 'clearance', '0.12.0', :git => 'git://github.com/agoodman/clearance.git'
 gem 'haml'
@@ -18,6 +18,7 @@ gem 'sass'
 gem 'coffee-script'
 gem 'json'
 gem 'uglifier'
+gem 'hirefireapp'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
@@ -26,7 +27,6 @@ gem 'uglifier'
 group :production do
   gem 'thin'
   gem 'pg'
-  gem 'hirefireapp'
 end
 
 group :development, :test do
