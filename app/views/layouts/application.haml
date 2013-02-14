@@ -6,7 +6,7 @@
 			= yield(:title)
 		%script{:src => "http://www.google.com/jsapi?key=ABQIAAAAPxTP6_umMHWyfMXHRo_PQBSEfduqM-1DVSJvrAuG-sXMl3D3XxRzHgplRb-82VvQp6BVNPn5n6zyAQ", :type => "text/javascript"}
 		%link{:rel => "stylesheet", :href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/eggplant/jquery-ui.css", :type => "text/css"}
-		= stylesheet_link_tag 'style'
+		= stylesheet_link_tag 'application'
 		= csrf_meta_tag
 		%script{ :type => "text/javascript", :src => "https://js.stripe.com/v1/"}
 		%script{ :type => "text/javascript"}
@@ -25,6 +25,7 @@
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 			})();
+		= javascript_include_tag 'application'
 
 %body
 	- if cookies[:'heroku-nav-data']

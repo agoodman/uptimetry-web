@@ -9,7 +9,7 @@ a { text-decoration: none; color: black; }
 ul { list-style: none; }
 
 #header { height: 75px; width: 100%; }
-#logo { background: url('/images/icon.png') no-repeat; padding-left: 75px; max-width: 200px; font-size: 12pt; }
+#logo { background: url('/assets/icon.png') no-repeat; padding-left: 75px; max-width: 200px; font-size: 12pt; }
 #logo a { background: transparent; }
 #logo p {
 	font-size: 8pt;

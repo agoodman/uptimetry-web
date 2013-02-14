@@ -30,8 +30,8 @@ label input { display: inline-block; width: 100%;}
 #menu li a { padding-top: 50px; display: block; }
 #menu li#logo a { padding-top: 0; }
 #menu li#logo { margin-left: 0; }
-#menu a.icon.account { background: url('/images/icon-account.png') no-repeat top center; }
-#menu a.icon.sites { background: url('/images/icon-sites.png') no-repeat top center; }
+#menu a.icon.account { background: url('/assets/icon-account.png') no-repeat top center; }
+#menu a.icon.sites { background: url('/assets/icon-sites.png') no-repeat top center; }
 #menu a:hover { 
 	color: #888;
 }
@@ -116,7 +116,7 @@ label input { display: inline-block; width: 100%;}
 	
 	#header { position: fixed; width: 150px; height: 100%; border-right: 1px solid #888; }
 	#header ul li { clear: both; display: block; padding: 20px 0; }
-	#header ul li#logo { background: url('/images/icon@2x.png') no-repeat; padding-top: 125px; }
+	#header ul li#logo { background: url('/assets/icon@2x.png') no-repeat; padding-top: 125px; }
 	#menu li { margin-left: 0; }
 	#content,
 	#footer { margin-left: 200px; }
@@ -164,7 +164,7 @@ label input { display: inline-block; width: 100%;}
 
 	#menu li { float: left; }
 
-	#logo { background: url('/images/icon.png') no-repeat; padding-left: 60px; }
+	#logo { background: url('/assets/icon.png') no-repeat; padding-left: 60px; }
 	#logo p { max-width: 140px; }
 
 	#public_menu {
