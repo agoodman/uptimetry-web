@@ -11,10 +11,7 @@
 		%script{ :type => "text/javascript", :src => "https://js.stripe.com/v1/"}
 		%script{ :type => "text/javascript"}
 			Stripe.setPublishableKey("#{ENV['STRIPE_PUBLIC']}");
-		/ %script{ :type => "text/javascript", :charset => "utf-8"}
-		/ 	google.load("jquery","1.4.2");
-		/ 	google.load("jqueryui","1.8.2");
-		= javascript_include_tag :defaults
+		= javascript_include_tag 'application'
 		%script{:type => "text/javascript"}
 			var _gaq = _gaq || [];
 			_gaq.push(['_setAccount', 'UA-4535281-5']);
@@ -25,7 +22,6 @@
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 			})();
-		= javascript_include_tag 'application'
 
 %body
 	- if cookies[:'heroku-nav-data']
