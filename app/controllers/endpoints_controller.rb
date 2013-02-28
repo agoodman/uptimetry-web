@@ -121,7 +121,7 @@ class EndpointsController < ApplicationController
       css_selector: endpoint.css_selector,
       xpath: endpoint.xpath
       }
-    client.tasks.create('monitor', attrs, {delay: (endpoint.retry_delay rescue 30).seconds})
+    client.tasks.create('monitor', attrs, {delay: endpoint.retry_delay.seconds})
   end
 
   def send_notification
