@@ -7,7 +7,7 @@ task :cron => :environment do
 
   User.all.each do |user| 
     endpoints = user.endpoints.sort {|x,y| x.created_at<=>y.created_at}.take(user.site_allowance)
-    client = IronWorkerNG::Client.new
+    client = IronWorkerNG::Client.new(token: ENV['IRON_WORKER_TOKEN'], project_id: ENV['IRON_WORKER_PROJECT_ID'])
     for endpoint in endpoints
       attrs = { 
         url: endpoint.url, 
