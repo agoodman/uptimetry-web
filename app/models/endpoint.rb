@@ -14,6 +14,7 @@ class Endpoint < ActiveRecord::Base
 
   before_create :generate_secret_key
   before_save :init_down_count
+  before_save :init_retry_delay
   before_destroy {|obj| Domain.delete(obj.domain_id) if obj.domain!=nil && obj.domain.endpoints.count==1}
   
   def generate_secret_key
@@ -22,6 +23,10 @@ class Endpoint < ActiveRecord::Base
   
   def init_down_count
     self.down_count = 0
+  end
+  
+  def init_retry_delay
+    self.retry_delay = 30 if retry_delay.blank?
   end
   
 end
