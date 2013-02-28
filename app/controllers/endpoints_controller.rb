@@ -114,14 +114,14 @@ class EndpointsController < ApplicationController
 
   def schedule_retry(endpoint)
     return unless Rails.env.production? # only schedule the worker in production env 
-    client = IronWorkerNG::Client.new
+    client = IronWorkerNG::Client.new(token: ENV['IRON_WORKER_TOKEN'], project_id: ENV['IRON_WORKER_PROJECT_ID'])
     attrs = { 
       url: endpoint.url, 
       secret_key: endpoint.secret_key, 
       css_selector: endpoint.css_selector,
       xpath: endpoint.xpath
       }
-    client.tasks.create('monitor', attrs, {delay: endpoint.retry_delay.seconds})
+    client.tasks.create('monitor', attrs, {delay: (endpoint.retry_delay rescue 30).seconds})
   end
 
   def send_notification
