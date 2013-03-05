@@ -6,6 +6,7 @@
 			= yield(:title)
 		%script{:src => "http://www.google.com/jsapi?key=ABQIAAAAPxTP6_umMHWyfMXHRo_PQBSEfduqM-1DVSJvrAuG-sXMl3D3XxRzHgplRb-82VvQp6BVNPn5n6zyAQ", :type => "text/javascript"}
 		%link{:rel => "stylesheet", :href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/eggplant/jquery-ui.css", :type => "text/css"}
+		%link{:rel => "icon", :type => "image/png", :href => "/assets/favicon.ico"}
 		= stylesheet_link_tag 'application'
 		= csrf_meta_tag
 		%script{ :type => "text/javascript", :src => "https://js.stripe.com/v1/"}
