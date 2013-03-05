@@ -20,6 +20,7 @@ module Uptimetry
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
     config.assets.enabled = true
+    config.assets.initialize_on_compile = false
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
