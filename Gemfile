@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+ruby '1.9.3'
+
 gem 'rails', '3.2.12'
 gem 'nokogiri'
 gem 'clearance', '0.12.0', :git => 'git://github.com/agoodman/clearance.git'
@@ -14,10 +16,7 @@ gem 'grocer'
 gem 'httparty'
 gem 'delayed_job_active_record'
 gem 'newrelic_rpm'
-gem 'sass'
-gem 'coffee-script'
 gem 'json'
-gem 'uglifier'
 gem 'hirefireapp'
 
 # Bundle gems for the local environment. Make sure to
@@ -38,3 +37,8 @@ group :test do
   gem 'shoulda'
 end
 
+group :assets do
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
+end
