@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,20 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212033224) do
+ActiveRecord::Schema.define(:version => 20130629145209) do
 
   create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "priority",   :default => 0
+    t.integer   "attempts",   :default => 0
+    t.text      "handler"
+    t.text      "last_error"
+    t.timestamp "run_at"
+    t.timestamp "locked_at"
+    t.timestamp "failed_at"
+    t.string    "locked_by"
+    t.string    "queue"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
@@ -45,6 +46,19 @@ ActiveRecord::Schema.define(:version => 20130212033224) do
   add_index "domains", ["name"], :name => "index_domains_on_name"
   add_index "domains", ["user_id"], :name => "index_domains_on_user_id"
 
+  create_table "edges", :force => true do |t|
+    t.integer  "src_id"
+    t.integer  "dst_id"
+    t.boolean  "directed"
+    t.boolean  "reversed"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "edges", ["dst_id"], :name => "index_edges_on_dst_id"
+  add_index "edges", ["src_id", "dst_id"], :name => "index_edges_on_src_id_and_dst_id"
+  add_index "edges", ["src_id"], :name => "index_edges_on_src_id"
+
   create_table "endpoints", :force => true do |t|
     t.string    "url"
     t.string    "email"
@@ -63,6 +77,29 @@ ActiveRecord::Schema.define(:version => 20130212033224) do
 
   add_index "endpoints", ["domain_id"], :name => "index_endpoints_on_domain_id"
   add_index "endpoints", ["secret_key"], :name => "index_sites_on_secret_key"
+
+  create_table "nodes", :force => true do |t|
+    t.integer  "order_id"
+    t.string   "url"
+    t.integer  "code"
+    t.string   "content_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "nodes", ["order_id"], :name => "index_nodes_on_order_id"
+  add_index "nodes", ["url"], :name => "index_nodes_on_url"
+
+  create_table "orders", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "url"
+    t.integer  "max_crawls"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "orders", ["url"], :name => "index_orders_on_url"
+  add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string    "email"

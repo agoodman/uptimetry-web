@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :domains, dependent: :destroy, order: 'name asc'
   # has_many :endpoints, through: :domains, :order => 'down_count desc, url asc'
   has_many :devices, dependent: :destroy
+  has_many :orders
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :heroku_id, :heroku_callback_url
   validates_presence_of :first_name, :last_name
