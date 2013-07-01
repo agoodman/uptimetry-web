@@ -1,0 +1,5 @@
+%h2 Pages
+= link_to_function 'show/hide', '$(this).next().toggle()'
+%ul{style:'display:none'}
+	- for node in @order.nodes
+		%li{class: node.code==200 ? 'ok' : 'fail'}= node.url

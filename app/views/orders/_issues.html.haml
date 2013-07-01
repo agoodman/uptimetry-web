@@ -1,0 +1,9 @@
+%h2 Issues
+%ul
+	- for node in @order.nodes.reject {|e| e.code==200 || e.code.nil?}
+		%li.error
+			#{node.code} #{node.url}
+			%h3 Linked From:
+			%ul.sources
+				- for src in node.linking_edges.map(&:src).uniq
+					%li= src.url

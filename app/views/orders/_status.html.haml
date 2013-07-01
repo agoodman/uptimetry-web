@@ -1,0 +1,9 @@
+%h2 Status: #{@order.pending? ? 'Pending' : (@order.complete? ? 'Complete' : 'Processing')}
+	
+- if @order.complete?
+	%p Report for #{@order.url}
+	%p Found #{@order.nodes.count} pages in #{distance_of_time_in_words(@order.nodes.last.created_at-@order.created_at)}
+- else
+	%p Requested: #{@order.url} #{time_ago_in_words(@order.created_at)} ago
+	%p Found #{@order.nodes.count} pages
+	#order_loading{style:"display:#{@order.complete? ? 'none' : 'block'}"}

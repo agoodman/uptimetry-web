@@ -18,6 +18,7 @@ Uptimetry::Application.routes.draw do
       get :remove
     end
   end
+  resources :orders
 
   match 'endpoints/:secret_key/up' => 'endpoints#up'
   match 'endpoints/:secret_key/down' => 'endpoints#down'

@@ -1,0 +1,18 @@
+%h2 Orders
+%ul
+	- for order in @orders
+		%li
+			%h3= link_to order.url, order_path(order)
+			%p Initiated: #{time_ago_in_words(order.created_at)} ago
+			%p Status: #{order.pending? ? 'pending' : (order.complete? ? 'complete' : 'processing')}
+= link_to_function 'New Order', '$("#new_order").show()'
+= form_for Order.new, html: { style: 'display:none' } do |f|
+	%p
+		= f.label :url
+		= f.text_field :url
+	%p
+		= f.label :max_crawls, 'Page Limit'
+		= f.collection_select :max_crawls, [100,200,300,400,500], :to_s, :to_s
+	%p
+		= f.submit "Place Order"
+		= link_to_function 'Cancel', '$("#new_order").hide()'

@@ -1,0 +1,9 @@
+$('#order_status').html("<%= escape_javascript(render(partial: 'status')) %>").effect('highlight');
+$('#order_pages').html("<%= escape_javascript(render(partial: 'pages')) %>").effect('highlight');
+$('#order_issues').html("<%= escape_javascript(render(partial: 'issues')) %>").effect('highlight');
+<% if @order.complete? -%>
+$('#order_loading').hide();
+<% else -%>
+$('#order_loading').show();
+setTimeout(function() { $.getScript('#{order_path(format: :js)}'); }, 5000);
+<% end -%>

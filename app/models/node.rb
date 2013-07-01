@@ -54,7 +54,7 @@ class Node < ActiveRecord::Base
       if uri.host && !uri.host.match(source_uri.host)
         puts "ignoring external link #{linked_url}"
       else
-        if uri.path[0]=='/'
+        if uri.path && uri.path[0]=='/'
           formatted_url = "#{uri.scheme || source_uri.scheme}://#{uri.host || source_uri.host}#{uri.path}"
         else
           formatted_url = "#{uri.scheme || source_uri.scheme}://#{uri.host || source_uri.host}#{source_uri.path[0..source_uri.path.rindex('/')] rescue '/'}#{uri.path}"

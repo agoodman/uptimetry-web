@@ -1,0 +1,12 @@
+= link_to '« All Orders', orders_path
+= link_to 'Remove', order_path(@order), method: :delete
+
+%section#order_status= render partial: 'status'
+	
+%section#order_pages= render partial: 'pages'
+
+%section#order_issues= render partial: 'issues'
+
+- unless @order.complete?
+	:javascript
+		$.getScript('#{order_path(format: :js)}');

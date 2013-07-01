@@ -24,4 +24,12 @@ class Order < ActiveRecord::Base
     nodes.count>=max_crawls
   end
   
+  def pending?
+    nodes.count == 1
+  end
+  
+  def complete?
+    Time.now-nodes.last.created_at > 30.seconds rescue false
+  end
+  
 end
